@@ -1,0 +1,9 @@
+site_name: VEIL Tools Guide
+theme:
+  name: readthedocs
+nav:
+  - Home: index.md
+  - PHIDRA: PHIDRA.md
+markdown_extensions:
+  - toc:
+      permalink: true
