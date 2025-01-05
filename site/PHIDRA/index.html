@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>PHIDRA - VEIL Tools Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PHIDRA";
+        var mkdocs_page_input_path = "PHIDRA.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> VEIL Tools Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">PHIDRA</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-pfam-database-optional">Setting up Pfam Database (Optional)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-create-an-interproscan-domain-architecture-ida-file">How to create an InterProScan Domain Architecture (IDA) file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-tool">Running the tool</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">VEIL Tools Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">PHIDRA</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-0.2_beta-blue" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
+<p><strong>P</strong>rotein <strong>H</strong>omology <strong>I</strong>dentification via <strong>D</strong>omain-<strong>R</strong>elated <strong>A</strong>rchitecture</p>
+<p>A simple way to search and validate identifed Pfam domains of interest against a curated InterProScan Domain Architecture (IDA) file to check whether or not your proteins match a domain composition found in the Interpro Database.</p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>A Python-based package of scripts that performs an initial homology search using <code>MMseqs2</code> to identify targeted proteins of interest in small or large datasets. Top hits are searched against the Pfam database using <code>pfam_scan</code>, and verified domains are checked and compared against a custom input InterProScan Domain Architecture (IDA) file relative to your target protein of interest. 
+A recursive search is then performed using the full length proteins with validated IDAs as the subject database and the original input as the query, with initial matches filtered out. This process captures potentially more distant proteins that may have been missed in the initial homology search but are functionally relevant.</p>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>phidra</code> can be ran either on a machine with a properly set up python environment or by creating a custom <a href="https://docs.conda.io/en/latest/">Conda</a> environment if you do not wish to change your current setup (recommended).</li>
+<li><a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a> required for inital and recursive homology search. </li>
+<li><a href="http://hmmer.org/documentation.html">HMMER</a> required for pfam database creation and protein domain identifcation through <code>pfam_scan</code>.</li>
+<li><a href="https://www.python.org/downloads/">Python</a> &gt;= 3.8 </li>
+</ul>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Conda setup (recommended) <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Help</a></li>
+</ul>
+<pre><code>#Create environment with &gt;= Python 3.8
+conda create --name phidra python=3.8
+
+#Activate environment
+conda activate phidra
+
+#Install hmmer/mmseqs2 (Required)
+conda install -c conda-forge -c bioconda mmseqs2
+conda install bioconda::hmmer
+
+#Clone tool into working directory
+git clone https://github.com/zschreib/phidra
+
+cd phidra
+
+#Grabs required python packages
+pip install -r requirements.txt
+
+</code></pre>
+<ul>
+<li>Python setup &gt;= Python 3.8, requires MMseqs2 and HMMER to be already set up.</li>
+</ul>
+<pre><code>git clone https://github.com/zschreib/phidra
+cd phidra
+pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>Tool Check. If you recieve any errors here do not proceede until fixed.</li>
+</ul>
+<pre><code>mmseqs -h
+hmmscan -h
+python phidra_run.py -v
+</code></pre>
+<h3 id="setting-up-pfam-database-optional">Setting up Pfam Database (Optional)<a class="headerlink" href="#setting-up-pfam-database-optional" title="Permanent link">&para;</a></h3>
+<ul>
+<li>If already have Pfam-hmm formatted database you can skip this step. </li>
+</ul>
+<pre><code>mkdir pfam_database
+cd pfam_database
+
+wget http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.dat.gz
+wget http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz
+
+gunzip -c Pfam-A.hmm.dat.gz &gt; Pfam-A.hmm.dat
+gunzip -c Pfam-A.hmm.gz &gt; Pfam-A.hmm
+rm Pfam-A.hmm.gz Pfam-A.hmm.dat.gz
+
+hmmpress Pfam-A.hmm
+</code></pre>
+<h2 id="how-to-create-an-interproscan-domain-architecture-ida-file">How to create an InterProScan Domain Architecture (IDA) file<a class="headerlink" href="#how-to-create-an-interproscan-domain-architecture-ida-file" title="Permanent link">&para;</a></h2>
+<h2 id="running-the-tool">Running the tool<a class="headerlink" href="#running-the-tool" title="Permanent link">&para;</a></h2>
+<pre><code>usage: phidra_run.py [--help] --input_fasta INPUT_FASTA --subject_db SUBJECT_DB --pfam_hmm_db PFAM_HMM_DB
+--ida_file IDA_FILE --function FUNCTION --output_dir OUTPUT_DIR [--threads THREADS] [--version]
+
+Identifies homologous proteins and associated Pfam domains from input protein sequences,
+while comparing against InterPro Domain Architectures to analyze domain-level similarities and functional relationships.
+
+Help:
+  --help, -h            Description of tool and usage
+
+Required arguments:
+  --input_fasta INPUT_FASTA, -i INPUT_FASTA
+                        Input protein (aa) FASTA file (default: None)
+  --subject_db SUBJECT_DB, -db SUBJECT_DB
+                        Protein subject database FASTA file (default: None)
+  --pfam_hmm_db PFAM_HMM_DB, -pfam PFAM_HMM_DB
+                        Pfam subject mmseqs DB file (default: None)
+  --ida_file IDA_FILE, -ida IDA_FILE
+                        IDA file for processing. Must be in Interpro IDA TSV format (default: None)
+  --function FUNCTION, -f FUNCTION
+                        Function of the protein of interest (default: None)
+  --output_dir OUTPUT_DIR, -o OUTPUT_DIR
+                        Directory for output results of that project (default: None)
+
+Optional Arguments:
+  --threads THREADS, -t THREADS
+                        Number of threads to use (default: 2)
+  --version, -v         Show program's version number and exit
+</code></pre>
+<ul>
+<li>Example run using the test data to search for DNA polymerase A</li>
+</ul>
+<pre><code>python phidra_run.py -i test_data/test_query/4_seq_test.fa -db test_data/test_subject/pola_16_k12_ref.fa -pfam pfam_database/pfam_hmm -ida test_data/ida_files/polA_IDA_list.tsv -f POLA -o test_results
+</code></pre>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Contributors names and contact info</p>
+<p>zschreib@udel.edu</p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>This project is licensed under the GNU General Public License v3.0 see the LICENSE file for details</p>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
+<p>Inspiration, code snippets, etc.
+* <a href="https://github.com/aziele/pfam_scan">pfam_scan</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
