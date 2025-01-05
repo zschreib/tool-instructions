@@ -56,6 +56,8 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -91,6 +93,30 @@
 Once the embeddings are generated, the next step will be to utilize UMAP (Uniform Manifold Approximation and Projection) to reduce their dimensionality and create visualizations. UMAP is a widely used technique for visualizing high-dimensional data, allowing for better interpretation and analysis of the high-dimensional embedding data.</p>
 <h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Conda setup (recommended) <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Help</a></li>
+<li>Note: The same conda environment can be use for running embeddings and visualization with UMAP so long as all the dependencies are installed. </li>
+</ul>
+<pre><code>#Create environment with &gt;= Python 3.8
+conda create --name esm-umap python=3.8
+
+#Activate environment
+conda activate esm-umap
+
+#Install 
+conda install -c conda-forge -c bioconda mmseqs2
+conda install bioconda::hmmer
+
+#Clone templates and test data
+git clone https://github.com/zschreib/
+
+cd esm-umap
+
+#Grabs required python packages
+pip install -r requirements.txt
+
+</code></pre>
               
             </div>
           </div><footer>
