@@ -10,3 +10,29 @@ Once the embeddings are generated, the next step will be to utilize UMAP (Unifor
 ## Getting Started
 
 ### Dependencies
+
+### Installation
+
+* Conda setup (recommended) [Help](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
+* Note: The same conda environment can be use for running embeddings and visualization with UMAP so long as all the dependencies are installed. 
+
+```
+#Create environment with >= Python 3.8
+conda create --name esm-umap python=3.8
+
+#Activate environment
+conda activate esm-umap
+
+#Install 
+conda install -c conda-forge -c bioconda mmseqs2
+conda install bioconda::hmmer
+
+#Clone templates and test data
+git clone https://github.com/zschreib/
+
+cd esm-umap
+
+#Grabs required python packages
+pip install -r requirements.txt
+
+```
