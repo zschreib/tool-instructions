@@ -85,6 +85,96 @@ sbatch embedding_template.sh
 
 * Logs will be found in the embedding_slurm_template directory. 
 
+## Visualization embedding output using UMAP for dimensionality reduction.
+
+# For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.
+
+```
+cd embedding-tutorial/umap_template
+
+Usage: python umap_visualize.py <input_directory> <output_plot_file.png>
+
+#Note:
+#Highly recommened to read through the UMAP documentation and get an idea of what each of these input parameters do.
+
+#Adjust according to how you want to represent your data.
+umap.UMAP(n_neighbors=3, min_dist=0.5, n_components=2, metric='euclidean').fit(embeddings)
+```
+
+* To run the UMAP script against the test data provided you can enter the following: 
+
+```
+python umap_visualize.py ../test_input/embeddings_data/ test_out.png
+```
+
+* Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
+
+# A more advanced template to customize your UMAP output with metadata.
+
+```
+cd embedding-tutorial/umap_color_template
+
+#The test_metadata.tsv will give a basic overview on how to structure a metadata file
+
+Query_ID        signature
+ENA_MN103542_MN103542_1_12796_10265_26  RDKL
+ENA_PP514360_PP514360_1_8414_6123_12    RDKL
+ENA_PP534163_PP534163_1_69504_71861_103 RDKF
+ENA_PP579741_PP579741_1_77727_75163_114 RDKF
+ENA_PP582188_PP582188_1_34616_36967_50  RDKL
+ENA_PP554395_PP554395_1_25693_23567_24  ABCD
+
+```
+* Values here will either be auto assigned a color based on the 'signature' column or manually assigned by how you structure the umap_color_visualize.py file
+
+```
+# Example of how to edit the map_color_visualize.py file to assign custom colors manually 
+
+def custom_color_manual(metadata_df, column_name):
+    # Predefined color table
+    color_table = {
+        "RDKF": '#ec4400',
+        "RDKL": '#8c29b1',
+        "RDKY": '#1b33e3',
+        "RDKH": '#008856',
+        # Add more entries as needed
+    }
+
+# Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
+
+# The manual and auto color generation will be saved here in the main function
+
+metadata_df['auto_color'] = metadata_df[column_name].map(auto_colors)
+metadata_df['manual_color'] = metadata_df[column_name].map(manual_colors)
+
+# You can use these in the 
+
+plot_umap(embeddings, embedding_ids, metadata_df, output_path)
+
+# by going to the function and selecting the color map you want.
+
+# Auto
+def plot_umap(embeddings, embedding_ids, metadata, output_file):
+
+    #maps your ids to color dictionary.
+    id_to_color = dict(zip(metadata['Query_ID'], metadata['auto_color']))
+
+# Manual
+def plot_umap(embeddings, embedding_ids, metadata, output_file):
+
+    #maps your ids to color dictionary.
+    id_to_color = dict(zip(metadata['Query_ID'], metadata['manual_color']))
+
+```
+
+* Here is how you can run the example data to visualize output with color.
+```
+python umap_color_visualize.py ../test_input/embeddings_data test_metadata.tsv signature manual_color.png
+```
+
+* Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
+* These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis. 
+
 ## Authors
 
 Contact info
