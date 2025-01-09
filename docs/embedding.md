@@ -87,15 +87,14 @@ sbatch embedding_template.sh
 
 ## Visualization embedding output using UMAP for dimensionality reduction.
 
-# For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.
+### For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.
 
 ```
 cd embedding-tutorial/umap_template
 
 Usage: python umap_visualize.py <input_directory> <output_plot_file.png>
 
-#Note:
-#Highly recommened to read through the UMAP documentation and get an idea of what each of these input parameters do.
+#Note: Highly recommened to read through the UMAP documentation and get an idea of what each of these input parameters do.
 
 #Adjust according to how you want to represent your data.
 umap.UMAP(n_neighbors=3, min_dist=0.5, n_components=2, metric='euclidean').fit(embeddings)
@@ -109,7 +108,7 @@ python umap_visualize.py ../test_input/embeddings_data/ test_out.png
 
 * Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
 
-# A more advanced template to customize your UMAP output with metadata.
+### A more advanced template to customize your UMAP output with metadata.
 
 ```
 cd embedding-tutorial/umap_color_template

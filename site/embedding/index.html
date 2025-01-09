@@ -66,9 +66,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
+    <li class="toctree-l2"><a class="reference internal" href="#visualization-embedding-output-using-umap-for-dimensionality-reduction">Visualization embedding output using UMAP for dimensionality reduction.</a>
     </li>
     </ul>
                 </li>
@@ -169,6 +167,90 @@ python $EXTRACT_SCRIPT $MODEL_PATH $INPUT_FILE $OUTPUT_DIR --repr_layers 36 --in
 </code></pre>
 <ul>
 <li>Logs will be found in the embedding_slurm_template directory. </li>
+</ul>
+<h2 id="visualization-embedding-output-using-umap-for-dimensionality-reduction">Visualization embedding output using UMAP for dimensionality reduction.<a class="headerlink" href="#visualization-embedding-output-using-umap-for-dimensionality-reduction" title="Permanent link">&para;</a></h2>
+<h1 id="for-the-general-use-of-umap-you-can-move-here-for-a-basic-introduction-of-how-to-process-your-embedding-output">For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.<a class="headerlink" href="#for-the-general-use-of-umap-you-can-move-here-for-a-basic-introduction-of-how-to-process-your-embedding-output" title="Permanent link">&para;</a></h1>
+<pre><code>cd embedding-tutorial/umap_template
+
+Usage: python umap_visualize.py &lt;input_directory&gt; &lt;output_plot_file.png&gt;
+
+#Note:
+#Highly recommened to read through the UMAP documentation and get an idea of what each of these input parameters do.
+
+#Adjust according to how you want to represent your data.
+umap.UMAP(n_neighbors=3, min_dist=0.5, n_components=2, metric='euclidean').fit(embeddings)
+</code></pre>
+<ul>
+<li>To run the UMAP script against the test data provided you can enter the following: </li>
+</ul>
+<pre><code>python umap_visualize.py ../test_input/embeddings_data/ test_out.png
+</code></pre>
+<ul>
+<li>Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.</li>
+</ul>
+<h1 id="a-more-advanced-template-to-customize-your-umap-output-with-metadata">A more advanced template to customize your UMAP output with metadata.<a class="headerlink" href="#a-more-advanced-template-to-customize-your-umap-output-with-metadata" title="Permanent link">&para;</a></h1>
+<pre><code>cd embedding-tutorial/umap_color_template
+
+#The test_metadata.tsv will give a basic overview on how to structure a metadata file
+
+Query_ID        signature
+ENA_MN103542_MN103542_1_12796_10265_26  RDKL
+ENA_PP514360_PP514360_1_8414_6123_12    RDKL
+ENA_PP534163_PP534163_1_69504_71861_103 RDKF
+ENA_PP579741_PP579741_1_77727_75163_114 RDKF
+ENA_PP582188_PP582188_1_34616_36967_50  RDKL
+ENA_PP554395_PP554395_1_25693_23567_24  ABCD
+
+</code></pre>
+<ul>
+<li>Values here will either be auto assigned a color based on the 'signature' column or manually assigned by how you structure the umap_color_visualize.py file</li>
+</ul>
+<pre><code># Example of how to edit the map_color_visualize.py file to assign custom colors manually 
+
+def custom_color_manual(metadata_df, column_name):
+    # Predefined color table
+    color_table = {
+        &quot;RDKF&quot;: '#ec4400',
+        &quot;RDKL&quot;: '#8c29b1',
+        &quot;RDKY&quot;: '#1b33e3',
+        &quot;RDKH&quot;: '#008856',
+        # Add more entries as needed
+    }
+
+# Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
+
+# The manual and auto color generation will be saved here in the main function
+
+metadata_df['auto_color'] = metadata_df[column_name].map(auto_colors)
+metadata_df['manual_color'] = metadata_df[column_name].map(manual_colors)
+
+# You can use these in the 
+
+plot_umap(embeddings, embedding_ids, metadata_df, output_path)
+
+# by going to the function and selecting the color map you want.
+
+# Auto
+def plot_umap(embeddings, embedding_ids, metadata, output_file):
+
+    #maps your ids to color dictionary.
+    id_to_color = dict(zip(metadata['Query_ID'], metadata['auto_color']))
+
+# Manual
+def plot_umap(embeddings, embedding_ids, metadata, output_file):
+
+    #maps your ids to color dictionary.
+    id_to_color = dict(zip(metadata['Query_ID'], metadata['manual_color']))
+
+</code></pre>
+<ul>
+<li>Here is how you can run the example data to visualize output with color.</li>
+</ul>
+<pre><code>python umap_color_visualize.py ../test_input/embeddings_data test_metadata.tsv signature manual_color.png
+</code></pre>
+<ul>
+<li>Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.</li>
+<li>These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis. </li>
 </ul>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contact info</p>
