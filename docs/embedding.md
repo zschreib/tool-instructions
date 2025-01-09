@@ -87,7 +87,9 @@ sbatch embedding_template.sh
 
 ## Visualization embedding output using UMAP for dimensionality reduction.
 
-### For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.
+### General use of UMAP 
+
+Basic introduction of how to process your embedding output.
 
 ```
 cd embedding-tutorial/umap_template
@@ -108,7 +110,9 @@ python umap_visualize.py ../test_input/embeddings_data/ test_out.png
 
 * Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
 
-### A more advanced template to customize your UMAP output with metadata.
+### Advanced UMAP use with metadata.
+
+Customize your plots with auto generated color maps or defined custom colors through metadata files.
 
 ```
 cd embedding-tutorial/umap_color_template
