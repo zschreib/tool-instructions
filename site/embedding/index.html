@@ -68,9 +68,9 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#visualization-embedding-output-using-umap-for-dimensionality-reduction">Visualization embedding output using UMAP for dimensionality reduction.</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#for-the-general-use-of-umap-you-can-move-here-for-a-basic-introduction-of-how-to-process-your-embedding-output">For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.</a>
+    <li class="toctree-l3"><a class="reference internal" href="#general-use-of-umap">General use of UMAP</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#a-more-advanced-template-to-customize-your-umap-output-with-metadata">A more advanced template to customize your UMAP output with metadata.</a>
+    <li class="toctree-l3"><a class="reference internal" href="#advanced-umap-use-with-metadata">Advanced UMAP use with metadata.</a>
     </li>
         </ul>
     </li>
@@ -179,7 +179,8 @@ python $EXTRACT_SCRIPT $MODEL_PATH $INPUT_FILE $OUTPUT_DIR --repr_layers 36 --in
 <li>Logs will be found in the embedding_slurm_template directory. </li>
 </ul>
 <h2 id="visualization-embedding-output-using-umap-for-dimensionality-reduction">Visualization embedding output using UMAP for dimensionality reduction.<a class="headerlink" href="#visualization-embedding-output-using-umap-for-dimensionality-reduction" title="Permanent link">&para;</a></h2>
-<h3 id="for-the-general-use-of-umap-you-can-move-here-for-a-basic-introduction-of-how-to-process-your-embedding-output">For the general use of UMAP you can move here for a basic introduction of how to process your embedding output.<a class="headerlink" href="#for-the-general-use-of-umap-you-can-move-here-for-a-basic-introduction-of-how-to-process-your-embedding-output" title="Permanent link">&para;</a></h3>
+<h3 id="general-use-of-umap">General use of UMAP<a class="headerlink" href="#general-use-of-umap" title="Permanent link">&para;</a></h3>
+<p>Basic introduction of how to process your embedding output.</p>
 <pre><code>cd embedding-tutorial/umap_template
 
 Usage: python umap_visualize.py &lt;input_directory&gt; &lt;output_plot_file.png&gt;
@@ -197,7 +198,8 @@ umap.UMAP(n_neighbors=3, min_dist=0.5, n_components=2, metric='euclidean').fit(e
 <ul>
 <li>Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.</li>
 </ul>
-<h3 id="a-more-advanced-template-to-customize-your-umap-output-with-metadata">A more advanced template to customize your UMAP output with metadata.<a class="headerlink" href="#a-more-advanced-template-to-customize-your-umap-output-with-metadata" title="Permanent link">&para;</a></h3>
+<h3 id="advanced-umap-use-with-metadata">Advanced UMAP use with metadata.<a class="headerlink" href="#advanced-umap-use-with-metadata" title="Permanent link">&para;</a></h3>
+<p>Customize your plots with auto generated color maps or defined custom colors through metadata files.</p>
 <pre><code>cd embedding-tutorial/umap_color_template
 
 #The test_metadata.tsv will give a basic overview on how to structure a metadata file

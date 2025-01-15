@@ -178,6 +178,101 @@ python umap_color_visualize.py ../test_input/embeddings_data test_metadata.tsv s
 * Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
 * These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis. 
 
+## Using HDBSCAN to Cluster Embedding Plots
+
+An introduction to using HDBSCAN with generated embeddings on a UMAP plot.
+For more information please see [HDBSCAN](https://umap-learn.readthedocs.io/en/latest/clustering.html#) utilization with UMAP.
+To learn more about what's going on behind HDBSCAN, check out [How it works](https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html)
+
+### Basic HDBSCAN
+
+This performs HDBSCAN clustering directly on your UMAP-transformed embeddings without taking into account local structure.
+
+The UMAP transformation and HDBSCAN clustering happen here:
+
+```
+def plot_umap_hdbscan(embeddings, embedding_ids, metadata, output_file):
+    
+    # Perform UMAP dimensionality reduction
+    standard_embedding = umap.UMAP(n_neighbors=3, min_dist=0.2, n_components=2, metric='euclidean', random_state=42).fit_transform(embeddings)
+
+    # Perform clustering with HDBSCAN
+    labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(embeddings)
+    clustered = (labels >= 0)
+
+``` 
+
+We can now plot the clustered and unclustered data here:
+
+```
+
+# Plotting the UMAP results with HDBSCAN clusters
+    plt.figure(figsize=(10, 7))
+    plt.scatter(
+        standard_embedding[~clustered, 0],
+        standard_embedding[~clustered, 1],
+        color="gray",
+        s=20,
+        alpha=0.5,
+        label="Noise",
+        marker="1" #tri_down for unclustered data
+    )
+    
+    #Shapes applied to clustered data only (can modify to all if needed)
+    unique_markers = set(markers)
+    for marker in unique_markers:
+        #Shape to embedding id
+        marker_mask = np.array([(m == marker) and clustered[i] for i, m in enumerate(markers)])
+        plt.scatter(
+            standard_embedding[marker_mask, 0],
+            standard_embedding[marker_mask, 1],
+            c=labels[marker_mask],
+            s=20,
+            cmap="Spectral",
+            marker=marker,
+            alpha=0.8
+        )
+
+```
+
+* Depending on the types of questions you want to answer with your data and assigned metadata, this may look different.
+
+To run a test on the provided data, try:
+
+```
+python umap_HDBSCAN_basic.py ../test_input/embeddings_data test_metadata.tsv cluster_basic_with_metadata.png
+```
+
+### Enhanced HDBSCAN with UMAP
+
+Important note taken from HDBSCAN documentation:
+
+"The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value – small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we’ll double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0."
+
+Notice the difference between the basic HDBSCAN and the order of operations for the enhanced version:
+
+```
+def plot_umap_hdbscan(embeddings, embedding_ids, output_file):
+
+    # Perform UMAP dimensionality reduction
+    standard_embedding = umap.UMAP(n_neighbors=3, min_dist=0.2, n_components=2, metric='euclidean', random_state=42).fit_transform(embeddings)
+    #HDBSCAN enhanced. Adjust according to data
+    clusterable_embedding = umap.UMAP(n_neighbors=6, min_dist=0.0, n_components=2, random_state=42).fit_transform(embeddings)
+    #Adjust according to data
+    labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(clusterable_embedding)
+    #New cluster labels
+    clustered = (labels >= 0)
+
+```
+
+* Compare the output of basic and enhanced versions to better understand how your clusters shift depending on the parameters you use and how you implement HDBSCAN with UMAP.
+
+To run a test on the data provided you can try out:
+
+```
+python umap_HDBSCAN_enhanced.py ../test_input/embeddings_data cluster_enhanced.png
+```
+
 ## Authors
 
 Contact info
