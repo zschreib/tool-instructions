@@ -131,7 +131,7 @@ ENA_PP554395_PP554395_1_25693_23567_24  ABCD
 * Values here will either be auto assigned a color based on the 'signature' column or manually assigned by how you structure the umap_color_visualize.py file
 
 ```
-# Example of how to edit the map_color_visualize.py file to assign custom colors manually 
+#Example of how to edit the map_color_visualize.py file to assign custom colors manually 
 
 def custom_color_manual(metadata_df, column_name):
     # Predefined color table
@@ -143,26 +143,26 @@ def custom_color_manual(metadata_df, column_name):
         # Add more entries as needed
     }
 
-# Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
+#Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
 
-# The manual and auto color generation will be saved here in the main function
+#The manual and auto color generation will be saved here in the main function
 
 metadata_df['auto_color'] = metadata_df[column_name].map(auto_colors)
 metadata_df['manual_color'] = metadata_df[column_name].map(manual_colors)
 
-# You can use these in the 
+#You can use these in the 
 
 plot_umap(embeddings, embedding_ids, metadata_df, output_path)
 
-# by going to the function and selecting the color map you want.
+#by going to the function and selecting the color map you want.
 
-# Auto
+#Auto
 def plot_umap(embeddings, embedding_ids, metadata, output_file):
 
     #maps your ids to color dictionary.
     id_to_color = dict(zip(metadata['Query_ID'], metadata['auto_color']))
 
-# Manual
+#Manual
 def plot_umap(embeddings, embedding_ids, metadata, output_file):
 
     #maps your ids to color dictionary.
@@ -193,10 +193,10 @@ The UMAP transformation and HDBSCAN clustering happen here:
 ```
 def plot_umap_hdbscan(embeddings, embedding_ids, metadata, output_file):
     
-    # Perform UMAP dimensionality reduction
+    #Perform UMAP dimensionality reduction
     standard_embedding = umap.UMAP(n_neighbors=3, min_dist=0.2, n_components=2, metric='euclidean', random_state=42).fit_transform(embeddings)
 
-    # Perform clustering with HDBSCAN
+    #Perform clustering with HDBSCAN
     labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(embeddings)
     clustered = (labels >= 0)
 
@@ -205,7 +205,7 @@ def plot_umap_hdbscan(embeddings, embedding_ids, metadata, output_file):
 We can now plot the clustered and unclustered data here:
 
 ```
-# Plotting the UMAP results with HDBSCAN clusters
+    #Plotting the UMAP results with HDBSCAN clusters
     plt.figure(figsize=(10, 7))
     plt.scatter(
         standard_embedding[~clustered, 0],
@@ -244,7 +244,7 @@ python umap_HDBSCAN_basic.py ../test_input/embeddings_data test_metadata.tsv clu
 ### Enhanced HDBSCAN with UMAP
 Important note taken from HDBSCAN documentation:
 
-The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value – small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we’ll double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0.
+The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we will double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0.
 
 Notice the difference between the basic HDBSCAN and the order of operations for the enhanced version:
 
