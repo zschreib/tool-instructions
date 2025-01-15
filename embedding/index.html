@@ -74,6 +74,14 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#using-hdbscan-to-cluster-embedding-plots">Using HDBSCAN to Cluster Embedding Plots</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#basic-hdbscan">Basic HDBSCAN</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#enhanced-hdbscan-with-umap">Enhanced HDBSCAN with UMAP</a>
+    </li>
+        </ul>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
@@ -216,7 +224,7 @@ ENA_PP554395_PP554395_1_25693_23567_24  ABCD
 <ul>
 <li>Values here will either be auto assigned a color based on the 'signature' column or manually assigned by how you structure the umap_color_visualize.py file</li>
 </ul>
-<pre><code># Example of how to edit the map_color_visualize.py file to assign custom colors manually 
+<pre><code>#Example of how to edit the map_color_visualize.py file to assign custom colors manually 
 
 def custom_color_manual(metadata_df, column_name):
     # Predefined color table
@@ -228,26 +236,26 @@ def custom_color_manual(metadata_df, column_name):
         # Add more entries as needed
     }
 
-# Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
+#Note: ENA_PP554395_PP554395_1_25693_23567_24  ABCD and other embeddings present in your that do not have a mapping will default to gray 
 
-# The manual and auto color generation will be saved here in the main function
+#The manual and auto color generation will be saved here in the main function
 
 metadata_df['auto_color'] = metadata_df[column_name].map(auto_colors)
 metadata_df['manual_color'] = metadata_df[column_name].map(manual_colors)
 
-# You can use these in the 
+#You can use these in the 
 
 plot_umap(embeddings, embedding_ids, metadata_df, output_path)
 
-# by going to the function and selecting the color map you want.
+#by going to the function and selecting the color map you want.
 
-# Auto
+#Auto
 def plot_umap(embeddings, embedding_ids, metadata, output_file):
 
     #maps your ids to color dictionary.
     id_to_color = dict(zip(metadata['Query_ID'], metadata['auto_color']))
 
-# Manual
+#Manual
 def plot_umap(embeddings, embedding_ids, metadata, output_file):
 
     #maps your ids to color dictionary.
@@ -261,8 +269,81 @@ def plot_umap(embeddings, embedding_ids, metadata, output_file):
 </code></pre>
 <ul>
 <li>Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.</li>
-<li>These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis. </li>
+<li>These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis.</li>
 </ul>
+<h2 id="using-hdbscan-to-cluster-embedding-plots">Using HDBSCAN to Cluster Embedding Plots<a class="headerlink" href="#using-hdbscan-to-cluster-embedding-plots" title="Permanent link">&para;</a></h2>
+<p>An introduction to using HDBSCAN with generated embeddings on a UMAP plot.
+For more information please see <a href="https://umap-learn.readthedocs.io/en/latest/clustering.html#">HDBSCAN</a> utilization with UMAP.
+To learn more about what's going on behind HDBSCAN, check out <a href="https://hdbscan.readthedocs.io/en/latest/how_hdbscan_works.html">How it works</a></p>
+<h3 id="basic-hdbscan">Basic HDBSCAN<a class="headerlink" href="#basic-hdbscan" title="Permanent link">&para;</a></h3>
+<p>This performs HDBSCAN clustering directly on your UMAP-transformed embeddings without taking into account local structure.</p>
+<p>The UMAP transformation and HDBSCAN clustering happen here:</p>
+<pre><code>def plot_umap_hdbscan(embeddings, embedding_ids, metadata, output_file):
+
+    #Perform UMAP dimensionality reduction
+    standard_embedding = umap.UMAP(n_neighbors=3, min_dist=0.2, n_components=2, metric='euclidean', random_state=42).fit_transform(embeddings)
+
+    #Perform clustering with HDBSCAN
+    labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(embeddings)
+    clustered = (labels &gt;= 0)
+
+</code></pre>
+<p>We can now plot the clustered and unclustered data here:</p>
+<pre><code>    #Plotting the UMAP results with HDBSCAN clusters
+    plt.figure(figsize=(10, 7))
+    plt.scatter(
+        standard_embedding[~clustered, 0],
+        standard_embedding[~clustered, 1],
+        color=&quot;gray&quot;,
+        s=20,
+        alpha=0.5,
+        label=&quot;Noise&quot;,
+        marker=&quot;1&quot; #tri_down for unclustered data
+    )
+
+    #Shapes applied to clustered data only (can modify to all if needed)
+    unique_markers = set(markers)
+    for marker in unique_markers:
+        #Shape to embedding id
+        marker_mask = np.array([(m == marker) and clustered[i] for i, m in enumerate(markers)])
+        plt.scatter(
+            standard_embedding[marker_mask, 0],
+            standard_embedding[marker_mask, 1],
+            c=labels[marker_mask],
+            s=20,
+            cmap=&quot;Spectral&quot;,
+            marker=marker,
+            alpha=0.8
+        )
+</code></pre>
+<ul>
+<li>Depending on the types of questions you want to answer with your data and assigned metadata, this may look different.</li>
+</ul>
+<p>To run a test on the provided data, try:</p>
+<pre><code>python umap_HDBSCAN_basic.py ../test_input/embeddings_data test_metadata.tsv cluster_basic_with_metadata.png
+</code></pre>
+<h3 id="enhanced-hdbscan-with-umap">Enhanced HDBSCAN with UMAP<a class="headerlink" href="#enhanced-hdbscan-with-umap" title="Permanent link">&para;</a></h3>
+<p>Important note taken from HDBSCAN documentation:</p>
+<p>The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we will double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0.</p>
+<p>Notice the difference between the basic HDBSCAN and the order of operations for the enhanced version:</p>
+<pre><code>def plot_umap_hdbscan(embeddings, embedding_ids, output_file):
+
+    # Perform UMAP dimensionality reduction
+    standard_embedding = umap.UMAP(n_neighbors=3, min_dist=0.2, n_components=2, metric='euclidean', random_state=42).fit_transform(embeddings)
+    #HDBSCAN enhanced. Adjust according to data
+    clusterable_embedding = umap.UMAP(n_neighbors=6, min_dist=0.0, n_components=2, random_state=42).fit_transform(embeddings)
+    #Adjust according to data
+    labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(clusterable_embedding)
+    #New cluster labels
+    clustered = (labels &gt;= 0)
+
+</code></pre>
+<ul>
+<li>Compare the output of basic and enhanced versions to better understand how your clusters shift depending on the parameters you use and how you implement HDBSCAN with UMAP.</li>
+</ul>
+<p>To run a test on the data provided you can try out:</p>
+<pre><code>python umap_HDBSCAN_enhanced.py ../test_input/embeddings_data cluster_enhanced.png
+</code></pre>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contact info</p>
 <p>zschreib@udel.edu</p>
