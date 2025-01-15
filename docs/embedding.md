@@ -176,7 +176,7 @@ python umap_color_visualize.py ../test_input/embeddings_data test_metadata.tsv s
 ```
 
 * Note: You may see some warnings if not on a GPU node but as long as there is a png image output they job as finished.
-* These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis. 
+* These templates are in place to a basic understanding on how to color UMAP plots in relation to your data. Feel free to edit them however you want for future analysis.
 
 ## Using HDBSCAN to Cluster Embedding Plots
 
@@ -200,12 +200,11 @@ def plot_umap_hdbscan(embeddings, embedding_ids, metadata, output_file):
     labels = hdbscan.HDBSCAN(min_samples=2, min_cluster_size=3).fit_predict(embeddings)
     clustered = (labels >= 0)
 
-``` 
+```
 
 We can now plot the clustered and unclustered data here:
 
 ```
-
 # Plotting the UMAP results with HDBSCAN clusters
     plt.figure(figsize=(10, 7))
     plt.scatter(
@@ -217,7 +216,7 @@ We can now plot the clustered and unclustered data here:
         label="Noise",
         marker="1" #tri_down for unclustered data
     )
-    
+
     #Shapes applied to clustered data only (can modify to all if needed)
     unique_markers = set(markers)
     for marker in unique_markers:
@@ -232,7 +231,6 @@ We can now plot the clustered and unclustered data here:
             marker=marker,
             alpha=0.8
         )
-
 ```
 
 * Depending on the types of questions you want to answer with your data and assigned metadata, this may look different.
@@ -244,10 +242,9 @@ python umap_HDBSCAN_basic.py ../test_input/embeddings_data test_metadata.tsv clu
 ```
 
 ### Enhanced HDBSCAN with UMAP
-
 Important note taken from HDBSCAN documentation:
 
-"The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value – small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we’ll double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0."
+The next thing to be aware of is that when using UMAP for dimension reduction you will want to select different parameters than if you were using it for visualization. First of all we will want a larger n_neighbors value – small values will focus more on very local structure and are more prone to producing fine grained cluster structure that may be more a result of patterns of noise in the data than actual clusters. In this case we’ll double it from the default 15 up to 30. Second it is beneficial to set min_dist to a very low value. Since we actually want to pack points together densely (density is what we want after all) a low value will help, as well as making cleaner separations between clusters. In this case we will simply set min_dist to be 0.
 
 Notice the difference between the basic HDBSCAN and the order of operations for the enhanced version:
 
