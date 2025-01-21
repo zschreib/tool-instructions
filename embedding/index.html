@@ -344,6 +344,21 @@ To learn more about what's going on behind HDBSCAN, check out <a href="https://h
 <p>To run a test on the data provided you can try out:</p>
 <pre><code>python umap_HDBSCAN_enhanced.py ../test_input/embeddings_data cluster_enhanced.png
 </code></pre>
+<ul>
+<li>If you would like to save the embedding ID and cluster assigned to output you can always add this line in: </li>
+</ul>
+<pre><code>    plt.close()
+    #End of plot
+
+    #Labels indexed in same order as embedding_id (very simple way of saving output)
+    df = pd.DataFrame({
+        'Embedding_ID': embedding_ids,
+        'Cluster': labels
+    })
+
+    #Write to output as a tab table
+    df.to_csv('cluster_output.tsv', sep='\t', index=False)
+</code></pre>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contact info</p>
 <p>zschreib@udel.edu</p>
