@@ -270,6 +270,22 @@ To run a test on the data provided you can try out:
 python umap_HDBSCAN_enhanced.py ../test_input/embeddings_data cluster_enhanced.png
 ```
 
+* If you would like to save the embedding ID and cluster assigned to output you can always add this line in: 
+
+```
+    plt.close()
+    #End of plot
+    
+    #Labels indexed in same order as embedding_id (very simple way of saving output)
+    df = pd.DataFrame({
+        'Embedding_ID': embedding_ids,
+        'Cluster': labels
+    })
+
+    #Write to output as a tab table
+    df.to_csv('cluster_output.tsv', sep='\t', index=False)
+```
+
 ## Authors
 
 Contact info
