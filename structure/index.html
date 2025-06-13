@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>3D Structure Tutorial - VEIL Tools Guide</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "3D Structure Tutorial";
+        var mkdocs_page_input_path = "structure.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> VEIL Tools Guide
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../PHIDRA/">PHIDRA</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../embedding/">ESM Embedding Tutorial</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">3D Structure Tutorial</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3d-structruture-predictions">3D structruture predictions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#submission">Submission</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-job">Run Job</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#download">Download</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">VEIL Tools Guide</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">3D Structure Tutorial</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="guide-to-generating-and-comparing-3d-protein-structures">Guide to generating and comparing 3D protein structures<a class="headerlink" href="#guide-to-generating-and-comparing-3d-protein-structures" title="Permanent link">&para;</a></h1>
+<p>This tutorial provides a step by step guide for generating 3D structural predictions using the AlphaFold3 web interface, performing structural comparisons with Foldseek, and visualizing pairwise alignments via the RCSB PDB platform.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>No coding knowledge is required. The only setup needed is to create an account on the AlphaFold3 web server: <a href="https://alphafoldserver.com/welcome">https://alphafoldserver.com/welcome</a>.  </p>
+<p>Note that this web interface is not ideal for analyses requiring large batches of 3D predictions (as you are limited to 30 jobs per day) or custom templates, and it enforces fixed parameters. For more advanced and customizable workflows, consider using the open-source version of AlphaFold3: <a href="https://github.com/google-deepmind/alphafold3">https://github.com/google-deepmind/alphafold3</a> though this does require a computational background.</p>
+<p>AlphaFold3 already provides a detailed guide, so please read the official documentation here: <a href="https://alphafoldserver.com/guides">AlphaFold3 Guide</a> before starting to fully understand the web interface.</p>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>For this tutorial, I will demonstrate the output using two sequences. By following this workflow, you will confidently be able to report what they are.</p>
+<p><strong>Sequence 1:</strong></p>
+<pre><code>Ga0531454_000088_17320_15773_17
+MQTKNGLVPTLRLSFEMTDALASIEQEGLKINLDTLEEIERSYQQEMDDLEVRLKELAQDAVGDTPVNLASPDDRSMLLYSRRVTNKQEWAAIFNLGTERRGATVKPKMRRRMSRKEFNRNVGRLTEVVYKTRAERCTNCLGHGRTRVVKKDGTLGKATRVCRVCGGSGVVYHNTHEVAGFKLLPRTTYDLAAAGFRTDKDTLDERRDDLRGDGREFVESYVRYNALRTYLNTFVEGIKNNVDSKGFIHPEFMQCVTATGRLSSRNPNFQNMPRGSTFAIRKVVESRFSGGYILEGDYSQLEFRVAGFLAKDEQAYTDVKNSVDVHNYTASVIGCTRQEAKAHTFKPLYGGTSGTEDQKRYYAAFKDKYAGVTEWHEELQRQAVTKRVIALPSGREYAFPDARWTEYGTATNRTAICNYPVQGFATADLLPIALVSLHNVVKSAGIRSVICNTVHDSIVMDVHPDEKDTCIDLMKHAMLSLPFETMRRYGLAYDMPVGIELKMGKNWLDLHEVEL
+</code></pre>
+<p><strong>Sequence 2:</strong></p>
+<pre><code>Ga0531454_000088_18790_18007_20
+YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEKIMLRIAQSYFAVFTSEMRGPMREDFVRRYAEEIAPYLTIMDSVGTSIEELDDYAKLNKPDIIFADQLDKFRIGGEYNRGDERLKQTYVLAREIAKRNKCLVWAVSQASYEAHDRQFIDYSMLDNSRTGKAGEADIIIGIGKTGSSEVENTVRHICISKNKLNGYHGMINSQIDVRRGVYY
+</code></pre>
+<h2 id="3d-structruture-predictions">3D structruture predictions<a class="headerlink" href="#3d-structruture-predictions" title="Permanent link">&para;</a></h2>
+<h3 id="submission">Submission<a class="headerlink" href="#submission" title="Permanent link">&para;</a></h3>
+<p>Once logged in to Alphafold3, you should be directed to the default submission page.</p>
+<p>Paste the <strong>Sequence 1</strong> residues into the input field and select <strong>Protein</strong>, as we are working with amino acid sequences. Set <strong>Copies</strong> to 1 since we are only interested in monomer predictions for this tutorial.</p>
+<p><img alt="AlphaFold3 Submission Page" src="../images/sequence_submission.png" /></p>
+<h3 id="run-job">Run Job<a class="headerlink" href="#run-job" title="Permanent link">&para;</a></h3>
+<p>You can optionally set a <strong>Job Name</strong> to help organize your submissions.  </p>
+<p>If you want reproducible results, set a <strong>Seed</strong> value. The seed controls the random initialization of the model -- using the same seed with the same input will always return the same prediction. If left blank, the server will assign a random seed, which may yield slightly different outputs across runs.</p>
+<p><img alt="AlphaFold3 Run Job" src="../images/sequence_job.png" /></p>
+<p>Click <strong>Confirm and submit job</strong>. The prediction process typically takes 5 to 10 minutes to complete but is largely dependent on the size of the protein.</p>
+<p>Below the sequence submission form is the <strong>Job History</strong> section. Once your job is finished, a checkmark will appear to the left of the job name. Click on the job name to view the 3D structure prediction.</p>
+<h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
+<p><img alt="AlphaFold3 Results" src="images/3D_results.png" /></p>
+<p>All results are displayed on this page. For more detailed explanations of each output, refer back to the guide mentioned at the beginning.</p>
+<p>The most important score here is the <strong>pTM</strong> (Predicted TM-score). Generally, a score above 0.5 suggests a predicted fold that may resemble one of the templates in the PDB. If you are seeing a lot of red and orange with a low <strong>pTM</strong> you may not want to use this structure. </p>
+<p>The <strong>ipTM</strong> (interface predicted TM-score) is currently blank because we are not modeling protein-protein interactions in this tutorial.</p>
+<h3 id="download">Download<a class="headerlink" href="#download" title="Permanent link">&para;</a></h3>
+<p>Click the <strong>Download</strong> button at the top of the results page and unzip the directory to access the Crystallographic Information Files (.cif), which contain the atomic structure data.</p>
+<p>AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../embedding/" class="btn btn-neutral float-left" title="ESM Embedding Tutorial"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../embedding/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
