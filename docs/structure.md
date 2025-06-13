@@ -53,7 +53,7 @@ Below the sequence submission form is the **Job History** section. Once your job
 
 ### Results
 
-![AlphaFold3 Results](images/3D_results.png)
+![AlphaFold3 Results](images/3d_results.png)
 
 All results are displayed on this page. For more detailed explanations of each output, refer back to the guide mentioned at the beginning.
 
