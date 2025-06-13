@@ -35,7 +35,7 @@ YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEK
 
 Once logged in to Alphafold3, you should be directed to the default submission page.
 
-Paste the **Sequence 1** residues into the input field and select **Protein**, as we are working with amino acid sequences. Set **Copies** to `1` since we are only interested in monomer predictions for this tutorial.
+Paste the **Sequence 1** residues into the input field and select **Protein**, as we are working with amino acid sequences. Set **Copies** to 1 since we are only interested in monomer predictions for this tutorial.
 
 ![AlphaFold3 Submission Page](images/sequence_submission.png)
 
@@ -63,6 +63,6 @@ The **ipTM** (interface predicted TM-score) is currently blank because we are no
 
 ### Download
 
-Click the **Download** button at the top of the results page and unzip the directory to access the Crystallographic Information Files (`.cif`), which contain the atomic structure data.
+Click the **Download** button at the top of the results page and unzip the directory to access the Crystallographic Information Files (.cif), which contain the atomic structure data.
 
 AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.
