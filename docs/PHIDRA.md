@@ -1,4 +1,4 @@
-#  PHIDRA ![Version](https://img.shields.io/badge/version-0.2_beta-blue)
+#  PHIDRA ![Version](https://img.shields.io/badge/version-0.3_beta-blue)
 **P**rotein **H**omology **I**dentification via **D**omain-**R**elated **A**rchitecture
 
 A simple way to search and validate identifed Pfam domains of interest against a curated InterProScan Domain Architecture (IDA) file to check whether or not your proteins match a domain composition found in the Interpro Database.
@@ -69,7 +69,47 @@ rm Pfam-A.hmm.gz Pfam-A.hmm.dat.gz
 hmmpress Pfam-A.hmm
 ```
 
-## How to create an InterProScan Domain Architecture (IDA) file
+## Creating an InterProScan Domain Architecture (IDA) file
+
+1. Identify essential domains
+* For DNA polymerase I, we have identified PF00476 (DNA_pol_A) as core domain 
+* Search domain on InterPro: `https://www.ebi.ac.uk/interpro/entry/pfam/PF00476/domain_architecture/`
+
+2. Download domain architecture data in TSV format for all or selected domain combinations\
+File should include:
+* IDA ID (unique hash)
+* Domain combinations
+* Protein counts within IDA
+* Representative sequence
+* Representative length
+* Domain positions/coordinates
+
+3. Sample IDA file in TSV format:
+```
+IDA ID	IDA Text	Unique Proteins	Representative Accession	Representative Length	Representative Domains
+82911c7e8cf0ed5121595d5944b2a2f9a2c4f49e	PF02739:IPR020046-PF01367:IPR020045-PF01612:IPR002562-PF00476:IPR001098	22766	P00582	928	PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[9-170],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[171-272],PF01612{DNA_pol_A_exo1}:IPR002562{3'-5'_exonuclease_dom}[330-516],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[551-925]
+d4033548d92ed83469d80faa39cea59a849060a8	PF00476:IPR001098	18435	P00581	704	PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[333-701]
+16983c3a921f1409678537d9977eca4ed176e7c2	PF02739:IPR020046-PF01367:IPR020045-PF22619:IPR054690-PF00476:IPR001098	10607	Q04957	877	PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[4-170],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[172-266],PF22619{DNA_polI_exo1}:IPR054690{DNA_polI_exonuclease}[318-457],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[498-875]
+ce54c2b3dc9b223aa1f4992353c0972accb51c74	PF02739:IPR020046-PF01367:IPR020045-PF00476:IPR001098	6038	O84500	866	PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[3-166],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[167-259],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[495-865]
+f54dc0def957e931720f1460942192debd6092ca	PF01612:IPR002562-PF00476:IPR001098	4576	Q05254	595	PF01612{DNA_pol_A_exo1}:IPR002562{3'-5'_exonuclease_dom}[19-210],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[243-587]
+```
+4. Analyze architectures
+
+
+Example: Core domain (PF00476) appears in different combinations
+
+Common associated domains:
+* PF02739 (5' exonuclease N-terminal)
+* PF01367 (5' exonuclease)
+* PF01612 (DNA polymerase A exonuclease)
+
+5. Use for validation
+
+* Compare unknown or known sequences against known architectures
+* Verify domain organization matches canonical patterns
+* Check domain order and spacing is biologically plausible (if desired)
+
+Domain architectures help validate protein predictions by ensuring essential functional domains are present in correct arrangements.
 
 
 ## Running the tool
@@ -108,6 +148,32 @@ Optional Arguments:
 ```
 python phidra_run.py -i test_data/test_query/4_seq_test.fa -db test_data/test_subject/pola_16_k12_ref.fa -pfam pfam_database/pfam_hmm -ida test_data/ida_files/polA_IDA_list.tsv -f POLA -o test_results
 ```
+
+## Results 
+
+```
+test_results/
+└── POLA
+    ├── final_results
+    │   ├── pfam_validated_domain_only.fa
+    │   ├── pfam_validated_full_protein.fa
+    │   └── pfam_validated_report.tsv
+    ├── mmseqs_results
+    │   ├── initial_search
+    │   │   ├── POLA_results.m8
+    │   │   ├── POLA_TopHit_Bitscore.tsv
+    │   │   ├── POLA_TopHit_Evalue.fa
+    │   │   └── POLA_TopHit_Evalue.tsv
+    │   └── recursive_search
+    │       └── POLA_recursive_results.m8
+    └── pfam_domain_results
+        ├── initial_search
+        │   └── pfam_coverage_report.tsv
+        └── recursive_search
+            └── pfam_coverage_report.tsv
+```
+
+ID: ENA_MF036692_MF036692_1_29921_27213_46 was apart of the DNA polymerase family B, did not have valid domains and therefore was not included in the final pfam_validated_reports
 
 ## Authors
 
