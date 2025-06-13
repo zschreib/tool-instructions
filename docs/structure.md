@@ -43,7 +43,7 @@ Paste the **Sequence 1** residues into the input field and select **Protein**, a
 
 You can optionally set a **Job Name** to help organize your submissions.  
 
-If you want reproducible results, set a **Seed** value. The seed controls the random initialization of the model — using the same seed with the same input will always return the same prediction. If left blank, the server will assign a random seed, which may yield slightly different outputs across runs.
+If you want reproducible results, set a **Seed** value. The seed controls the random initialization of the model -- using the same seed with the same input will always return the same prediction. If left blank, the server will assign a random seed, which may yield slightly different outputs across runs.
 
 ![AlphaFold3 Run Job](images/sequence_job.png)
 
