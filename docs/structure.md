@@ -65,4 +65,4 @@ The **ipTM** (interface predicted TM-score) is currently blank because we are no
 
 Click the **Download** button at the top of the results page and unzip the directory to access the Crystallographic Information Files (`.cif`), which contain the atomic structure data.
 
-AlphaFold3 returns five sets of predictions, labeled `model_0` through `model_4`, along with their corresponding confidence scores in the `summary_confidences_0-4` files. In practice, `model_0` often contains the best prediction, but it's a good idea to review all confidence scores to confirm.
+AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.
