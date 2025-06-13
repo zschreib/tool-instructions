@@ -53,7 +53,7 @@ Below the sequence submission form is the **Job History** section. Once your job
 
 ### Results
 
-![AlphaFold3 Results](images/3d_results.png)
+![AlphaFold3 Results](images/3D_results.png)
 
 All results are displayed on this page. For more detailed explanations of each output, refer back to the guide mentioned at the beginning.
 
@@ -66,3 +66,26 @@ The **ipTM** (interface predicted TM-score) is currently blank because we are no
 Click the **Download** button at the top of the results page and unzip the directory to access the Crystallographic Information Files (.cif), which contain the atomic structure data.
 
 AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.
+
+### Follow up
+
+Repeat this process for sequence two. Once you have both model_0.cif for Sequence one and two you can move to the next step. 
+
+## 3D structruture comparison
+
+## Authors
+
+Contributors names and contact info
+
+zschreib@udel.edu
+
+## Acknowledgments
+
+The tutorial here utilizes tools from various sources:
+
+Abramson, J et al. Accurate structure prediction of biomolecular interactions with AlphaFold 3. Nature (2024).
+
+van Kempen M, Kim S, Tumescheit C, Mirdita M, Lee J, Gilchrist CLM, Soding J, and Steinegger M.  
+*Fast and accurate protein structure search with Foldseek.* Nature Biotechnology, 2023.
+
+Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments, Bioinformatics, Volume 40, Issue 6, June 2024.
