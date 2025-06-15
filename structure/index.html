@@ -102,6 +102,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-sequence-2-analysis">Practice: Sequence 2 Analysis</a>
+    </li>
     <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
@@ -168,7 +170,7 @@ YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEK
 <p>Click the <strong>Download</strong> button at the top of the results page and unzip the directory to access the Crystallographic Information Files (.cif), which contain the atomic structure data.</p>
 <p>AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.</p>
 <h3 id="follow-up">Follow up<a class="headerlink" href="#follow-up" title="Permanent link">&para;</a></h3>
-<p>Repeat this process for sequence two. Once you have both model_0.cif for Sequence one and two you can move to the next step. </p>
+<p>Repeat this process for sequence two. Once you have both model_0.cif for <strong>Sequence 1</strong> and two you can move to the next step. </p>
 <h2 id="structural-comparison-with-foldseek">Structural Comparison with Foldseek<a class="headerlink" href="#structural-comparison-with-foldseek" title="Permanent link">&para;</a></h2>
 <p>Foldseek is a fast and scalable tool for comparing protein 3D structures by aligning them using structural similarity, enabling high throughput searches across large structure databases.</p>
 <h3 id="submission_1">Submission<a class="headerlink" href="#submission_1" title="Permanent link">&para;</a></h3>
@@ -228,6 +230,9 @@ DALI does not accept <em>.cif</em> files, so you must convert your AlphaFold3 ou
 <p><a href="https://www.rcsb.org/structure/1KFD">https://www.rcsb.org/structure/1KFD</a></p>
 <h3 id="follow-up_2">Follow up<a class="headerlink" href="#follow-up_2" title="Permanent link">&para;</a></h3>
 <p>This section provides a way to search for more remote homology by using <strong>Z-score</strong> and <strong>RMSD</strong> values to assess fold similarity. Even when sequence identity is low, high Z-scores with reasonable RMSD values can indicate structural conservation. This can help refine your hypothesis about protein function. Follow-up analyses, such as structural alignments, allow you to precisely identify which regions of your unknown structure align with known proteins, offering deeper insight into potential roles and evolutionary relationships.</p>
+<h2 id="practice-sequence-2-analysis">Practice: Sequence 2 Analysis<a class="headerlink" href="#practice-sequence-2-analysis" title="Permanent link">&para;</a></h2>
+<p>Try running this workflow with <strong>Sequence 2</strong> to see if you can generate a confident structural prediction. Based on the Foldseek or DALI results, assess whether any functional or structural annotations can be confidently assigned.</p>
+<p>If you are curious whether <strong>Sequence 2</strong> may physically interact with <strong>Sequence 1</strong>, consider testing them together using <strong>AlphaFold3 Multimer</strong>, which is designed to predict protein-protein complexes.</p>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contributors names and contact info</p>
 <p>zschreib@udel.edu</p>
