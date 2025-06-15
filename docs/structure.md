@@ -139,12 +139,12 @@ If you are still interested in exploring your sequence of interest and did not f
 
 ![DALI Submission](images/dali_homepage.png)
 
-In this example, I search a structure against the **Protein Data Bank (PDB)** by uploading a *.pdb* file and providing a **Job title** and **Email address** to receive the results.
+In this example, I search a structure against the **Protein Data Bank (PDB)** using **PDB Search** by uploading a *.pdb* file and providing a **Job title** and **Email address** to receive the results.
 
 **Important:**  
-DALI does not accept *.cif* files, so you must convert your AlphaFold3 output to *.pdb* format before submitting.  
-You can write your own script or use this online converter:  
-[.cif -> to -> .pdb](https://project-gemmi.github.io/wasm/convert/cif2pdb.html)
+DALI does not accept *.cif* files, so you must convert your AlphaFold3 output to *.pdb* format before submitting. You can write your own script or use this online converter:  
+
+[.cif -> to -> .pdb converter](https://project-gemmi.github.io/wasm/convert/cif2pdb.html)
 
 ### Results
 
@@ -167,10 +167,15 @@ For this tutorial, we will focus on the **Matches against full PDB** section to 
 The DALI results table summarizes structural alignments between your query and known protein structures. Key columns include:
 
 **Z**: Statistical significance of the alignment (higher = more confident match)
+
 **RMSD**: Root-mean-square deviation between aligned structures
+
 **%ID**: Percent sequence identity
+
 **PDB**: Link to the matched PDB entry
+
 **Description**: Functional annotation of the hit
+
 
 In this example, the top hits all align to **DNA polymerase** proteins, suggesting strong structural similarity with the query sequence.
 
