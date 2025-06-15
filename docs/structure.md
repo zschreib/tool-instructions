@@ -69,7 +69,7 @@ AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, al
 
 ### Follow up
 
-Repeat this process for sequence two. Once you have both model_0.cif for Sequence one and two you can move to the next step. 
+Repeat this process for sequence two. Once you have both model_0.cif for **Sequence 1** and two you can move to the next step. 
 
 ## Structural Comparison with Foldseek
 
@@ -188,6 +188,12 @@ You can look up this complex on the **RCSB PDB** to view the full crystal struct
 ### Follow up
 
 This section provides a way to search for more remote homology by using **Z-score** and **RMSD** values to assess fold similarity. Even when sequence identity is low, high Z-scores with reasonable RMSD values can indicate structural conservation. This can help refine your hypothesis about protein function. Follow-up analyses, such as structural alignments, allow you to precisely identify which regions of your unknown structure align with known proteins, offering deeper insight into potential roles and evolutionary relationships.
+
+## Practice: Sequence 2 Analysis
+
+Try running this workflow with **Sequence 2** to see if you can generate a confident structural prediction. Based on the Foldseek or DALI results, assess whether any functional or structural annotations can be confidently assigned.
+
+If you are curious whether **Sequence 2** may physically interact with **Sequence 1**, consider testing them together using **AlphaFold3 Multimer**, which is designed to predict protein-protein complexes.
 
 
 ## Authors
