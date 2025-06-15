@@ -98,7 +98,7 @@ I recommend selecting **TM-align** as the search mode. For more information on t
 
 #### Sensitivity
 
-Iterative searching is generally not needed if you're already identifying homologous hits to known sequences. It can increase runtime significantly but may help uncover distant homologs in more unknown sequences.
+Iterative searching is generally not needed if you are already identifying homologous hits to known sequences. It can increase runtime significantly but may help uncover distant homologs in more unknown sequences.
 
 ### Results
 
@@ -106,7 +106,7 @@ Iterative searching is generally not needed if you're already identifying homolo
 
 Once your job is complete, the **Results** page will display a list of 1000 top hits for each database you selected, as well as an aggregated view under the **ALL DATABASES** tab, sorted by best scores.
 
-For this example, we’ll focus on the top hits in the **BFVD** database. Results are sorted by **TM-align score**, so you can choose the top ranking structure as the best representative. To explore more details, click on the **Target URL** to view the full entry on its dedicated results page. Depending on what you select, this will either redirect you to Foldseek **BFVD** or a Uniref results page. 
+For this example, we will focus on the top hits in the **BFVD** database. Results are sorted by **TM-align score**, so you can choose the top ranking structure as the best representative. To explore more details, click on the **Target URL** to view the full entry on its dedicated results page. Depending on what you select, this will either redirect you to Foldseek **BFVD** or a Uniref results page. 
 
 ### Download
 
