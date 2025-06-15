@@ -73,6 +73,8 @@ Repeat this process for sequence two. Once you have both model_0.cif for Sequenc
 
 ## Structural Comparison with Foldseek
 
+Foldseek is a fast and scalable tool for comparing protein 3D structures by aligning them using structural similarity, enabling high throughput searches across large structure databases.
+
 ### Submission
 
 After unzipping your AlphaFold3 output and selecting the best model (e.g., fold_sequence_1_test_model_0.cif), head over to the [Foldseek Search Server](https://search.foldseek.com/search) to compare your predicted structure against a wide range of structural databases.
@@ -80,6 +82,7 @@ After unzipping your AlphaFold3 output and selecting the best model (e.g., fold_
 Using the web interface limits some customization compared to running Foldseek locally, but again no coding experience is needed. For a deeper understanding of the Foldseek methods and advanced usage options, it is highly recommended to read through the official documentation:
 
 [Foldseek GitHub Repository](https://github.com/steineggerlab/foldseek)
+
 [Foldseek Wiki](https://github.com/steineggerlab/foldseek/wiki)
 
 ![Foldseek Homepage](images/foldseek_homepage.png)
@@ -118,13 +121,68 @@ To download the top hit representative structure, click the **PDB** button locat
 
 ![Foldseek Table](images/foldseek_tophit_table.png)
 
-To download the full top hit results table, navigate back to the **Results** page and use the dropdown menu below the hit list to select the desired format for download.
+To download the full top hit results table, navigate back to the **Results** page and use the dropdown menu to the left of the hit list and select the desired format for download.
 
 ### Follow up
 
 You now know how to generate a protein structure using AlphaFold3, perform a structural comparison with TM-align via Foldseek, identify top hits across multiple databases, explore annotations, and download a representative structure.
 
 However, if you are searching for unknowns and still receive low scores or no informative representatives, a different approach will be needed to further investigate the structure or function.
+
+## Structural Comparison with DALI
+
+DALI (Distance matrix ALIgnment) compares protein structures based on intramolecular distance patterns to detect structural similarities, even among distantly related proteins.
+
+### Submission
+
+If you are still interested in exploring your sequence of interest and did not find informative hits using Foldseek, you can try the [DALI webserver](http://ekhidna2.biocenter.helsinki.fi/dali/).
+
+![DALI Submission](images/dali_homepage.png)
+
+In this example, I search a structure against the **Protein Data Bank (PDB)** by uploading a *.pdb* file and providing a **Job title** and **Email address** to receive the results.
+
+**Important:**  
+DALI does not accept *.cif* files, so you must convert your AlphaFold3 output to *.pdb* format before submitting.  
+You can write your own script or use this online converter:  
+[.cif -> to -> .pdb](https://project-gemmi.github.io/wasm/convert/cif2pdb.html)
+
+### Results
+
+You should receive an email with the results in about 5 to 10 minutes. Alternatively, the submission page may redirect you directly to the results once processing is complete if you have the tab open.
+
+A detailed explanation of the DALI output can be found in the following guide:
+ 
+[DALI Tutorial 2022 (PDF)](http://ekhidna2.biocenter.helsinki.fi/dali/DaliTutorial2022.pdf)
+
+For that reason, I will not go into detail here about how to interpret the output.
+
+![DALI Results Page](images/dali_output_1.png)
+
+Whether through the page redirection or the email link, you will be taken to the DALI results page. From here, you can explore individual hits or download the full results table.
+
+For this tutorial, we will focus on the **Matches against full PDB** section to get a comprehensive view of structural similarities.
+
+![DALI Results Table](images/dali_output_2.png)
+
+The DALI results table summarizes structural alignments between your query and known protein structures. Key columns include:
+
+**Z**: Statistical significance of the alignment (higher = more confident match)
+**RMSD**: Root-mean-square deviation between aligned structures
+**%ID**: Percent sequence identity
+**PDB**: Link to the matched PDB entry
+**Description**: Functional annotation of the hit
+
+In this example, the top hits all align to **DNA polymerase** proteins, suggesting strong structural similarity with the query sequence.
+
+The top hit aligns with the **1kfd-A** chain, showing a high **Z-score** and a moderately low **RMSD**, which suggests similar function but some degree of structural divergence in the fold.
+
+You can look up this complex on the **RCSB PDB** to view the full crystal structure along with other metadata:
+
+[https://www.rcsb.org/structure/1KFD](https://www.rcsb.org/structure/1KFD)
+
+### Follow up
+
+This section provides a way to search for more remote homology by using **Z-score** and **RMSD** values to assess fold similarity. Even when sequence identity is low, high Z-scores with reasonable RMSD values can indicate structural conservation. This can help refine your hypothesis about protein function. Follow-up analyses, such as structural alignments, allow you to precisely identify which regions of your unknown structure align with known proteins, offering deeper insight into potential roles and evolutionary relationships.
 
 
 ## Authors
