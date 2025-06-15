@@ -203,11 +203,10 @@ YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEK
 <h3 id="submission_2">Submission<a class="headerlink" href="#submission_2" title="Permanent link">&para;</a></h3>
 <p>If you are still interested in exploring your sequence of interest and did not find informative hits using Foldseek, you can try the <a href="http://ekhidna2.biocenter.helsinki.fi/dali/">DALI webserver</a>.</p>
 <p><img alt="DALI Submission" src="../images/dali_homepage.png" /></p>
-<p>In this example, I search a structure against the <strong>Protein Data Bank (PDB)</strong> by uploading a <em>.pdb</em> file and providing a <strong>Job title</strong> and <strong>Email address</strong> to receive the results.</p>
+<p>In this example, I search a structure against the <strong>Protein Data Bank (PDB)</strong> using <strong>PDB Search</strong> by uploading a <em>.pdb</em> file and providing a <strong>Job title</strong> and <strong>Email address</strong> to receive the results.</p>
 <p><strong>Important:</strong><br />
-DALI does not accept <em>.cif</em> files, so you must convert your AlphaFold3 output to <em>.pdb</em> format before submitting.<br />
-You can write your own script or use this online converter:<br />
-<a href="https://project-gemmi.github.io/wasm/convert/cif2pdb.html">.cif -&gt; to -&gt; .pdb</a></p>
+DALI does not accept <em>.cif</em> files, so you must convert your AlphaFold3 output to <em>.pdb</em> format before submitting. You can write your own script or use this online converter:  </p>
+<p><a href="https://project-gemmi.github.io/wasm/convert/cif2pdb.html">.cif -&gt; to -&gt; .pdb converter</a></p>
 <h3 id="results_2">Results<a class="headerlink" href="#results_2" title="Permanent link">&para;</a></h3>
 <p>You should receive an email with the results in about 5 to 10 minutes. Alternatively, the submission page may redirect you directly to the results once processing is complete if you have the tab open.</p>
 <p>A detailed explanation of the DALI output can be found in the following guide:</p>
@@ -218,11 +217,11 @@ You can write your own script or use this online converter:<br />
 <p>For this tutorial, we will focus on the <strong>Matches against full PDB</strong> section to get a comprehensive view of structural similarities.</p>
 <p><img alt="DALI Results Table" src="../images/dali_output_2.png" /></p>
 <p>The DALI results table summarizes structural alignments between your query and known protein structures. Key columns include:</p>
-<p><strong>Z</strong>: Statistical significance of the alignment (higher = more confident match)
-<strong>RMSD</strong>: Root-mean-square deviation between aligned structures
-<strong>%ID</strong>: Percent sequence identity
-<strong>PDB</strong>: Link to the matched PDB entry
-<strong>Description</strong>: Functional annotation of the hit</p>
+<p><strong>Z</strong>: Statistical significance of the alignment (higher = more confident match)</p>
+<p><strong>RMSD</strong>: Root-mean-square deviation between aligned structures</p>
+<p><strong>%ID</strong>: Percent sequence identity</p>
+<p><strong>PDB</strong>: Link to the matched PDB entry</p>
+<p><strong>Description</strong>: Functional annotation of the hit</p>
 <p>In this example, the top hits all align to <strong>DNA polymerase</strong> proteins, suggesting strong structural similarity with the query sequence.</p>
 <p>The top hit aligns with the <strong>1kfd-A</strong> chain, showing a high <strong>Z-score</strong> and a moderately low <strong>RMSD</strong>, which suggests similar function but some degree of structural divergence in the fold.</p>
 <p>You can look up this complex on the <strong>RCSB PDB</strong> to view the full crystal structure along with other metadata:</p>
