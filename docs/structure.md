@@ -139,7 +139,7 @@ If you are still interested in exploring your sequence of interest and did not f
 
 ![DALI Submission](images/dali_homepage.png)
 
-In this example, I search a structure against the **Protein Data Bank (PDB)** using **PDB Search** by uploading a *.pdb* file and providing a **Job title** and **Email address** to receive the results.
+In this example, I search **Sequence 1** against the **Protein Data Bank (PDB)** using **PDB Search** by uploading a *.pdb* file and providing a **Job title** and **Email address** to receive the results.
 
 **Important:**  
 DALI does not accept *.cif* files, so you must convert your AlphaFold3 output to *.pdb* format before submitting. You can write your own script or use this online converter:  
