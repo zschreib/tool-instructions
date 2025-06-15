@@ -1,6 +1,6 @@
 # Guide to generating and comparing 3D protein structures 
 
-This tutorial provides a step by step guide for generating 3D structural predictions using the AlphaFold3 web interface, performing structural comparisons with Foldseek, and visualizing pairwise alignments via the RCSB PDB platform.
+This tutorial provides a step by step guide for generating 3D structural predictions using the AlphaFold3 web interface, performing structural comparisons using the Foldseek and DALI web server.
 
 ## Prerequisites
 
