@@ -29,7 +29,7 @@ Ga0531454_000088_18790_18007_20
 YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEKIMLRIAQSYFAVFTSEMRGPMREDFVRRYAEEIAPYLTIMDSVGTSIEELDDYAKLNKPDIIFADQLDKFRIGGEYNRGDERLKQTYVLAREIAKRNKCLVWAVSQASYEAHDRQFIDYSMLDNSRTGKAGEADIIIGIGKTGSSEVENTVRHICISKNKLNGYHGMINSQIDVRRGVYY
 ```
 
-## 3D structruture predictions
+## 3D structruture predictions using Alphafold3
 
 ### Submission
 
@@ -71,7 +71,61 @@ AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, al
 
 Repeat this process for sequence two. Once you have both model_0.cif for Sequence one and two you can move to the next step. 
 
-## 3D structruture comparison
+## Structural Comparison with Foldseek
+
+### Submission
+
+After unzipping your AlphaFold3 output and selecting the best model (e.g., fold_sequence_1_test_model_0.cif), head over to the [Foldseek Search Server](https://search.foldseek.com/search) to compare your predicted structure against a wide range of structural databases.
+
+Using the web interface limits some customization compared to running Foldseek locally, but again no coding experience is needed. For a deeper understanding of the Foldseek methods and advanced usage options, it is highly recommended to read through the official documentation:
+
+[Foldseek GitHub Repository](https://github.com/steineggerlab/foldseek)
+[Foldseek Wiki](https://github.com/steineggerlab/foldseek/wiki)
+
+![Foldseek Homepage](images/foldseek_homepage.png)
+
+Once on the Foldseek homepage, navigate to the **Monomer Search** tab (this should be the default view) and upload your *protein.cif* file of interest.
+
+![Foldseek Search](images/foldseek_settings.png)
+
+#### Databases
+
+The image above shows the available subject databases and run options you can select. For phage (known and unknown), I typically stick with the parameters shown in the figure. I usually only select the databases highlighted there, but you can experiment with others depending on your research questions. Keep in mind that the more databases you select, the longer the job will take to run.
+
+#### Mode
+
+I recommend selecting **TM-align** as the search mode. For more information on the differences between available modes, consult the [Foldseek GitHub documentation](https://github.com/steineggerlab/foldseek).
+
+#### Sensitivity
+
+Iterative searching is generally not needed if you're already identifying homologous hits to known sequences. It can increase runtime significantly but may help uncover distant homologs in more unknown sequences.
+
+### Results
+
+![Foldseek Results](images/foldseek_results.png)
+
+Once your job is complete, the **Results** page will display a list of 1000 top hits for each database you selected, as well as an aggregated view under the **ALL DATABASES** tab, sorted by best scores.
+
+For this example, we’ll focus on the top hits in the **BFVD** database. Results are sorted by **TM-align score**, so you can choose the top ranking structure as the best representative. To explore more details, click on the **Target URL** to view the full entry on its dedicated results page. Depending on what you select, this will either redirect you to Foldseek **BFVD** or a Uniref results page. 
+
+### Download
+
+![Foldseek Top hit](images/foldseek_tophit_example.png)
+
+The top hit page is fairly self explanatory. In this example, we can see that our **Sequence 1** test is similar to a DNA polymerase.
+
+To download the top hit representative structure, click the **PDB** button located above the structure viewer.
+
+![Foldseek Table](images/foldseek_tophit_table.png)
+
+To download the full top hit results table, navigate back to the **Results** page and use the dropdown menu below the hit list to select the desired format for download.
+
+### Follow up
+
+You now know how to generate a protein structure using AlphaFold3, perform a structural comparison with TM-align via Foldseek, identify top hits across multiple databases, explore annotations, and download a representative structure.
+
+However, if you are searching for unknowns and still receive low scores or no informative representatives, a different approach will be needed to further investigate the structure or function.
+
 
 ## Authors
 
@@ -83,9 +137,11 @@ zschreib@udel.edu
 
 The tutorial here utilizes tools from various sources:
 
-Abramson, J et al. Accurate structure prediction of biomolecular interactions with AlphaFold 3. Nature (2024).
+Abramson, J et al. *Accurate structure prediction of biomolecular interactions with AlphaFold 3.* Nature, 2024.
 
 van Kempen M, Kim S, Tumescheit C, Mirdita M, Lee J, Gilchrist CLM, Soding J, and Steinegger M.  
 *Fast and accurate protein structure search with Foldseek.* Nature Biotechnology, 2023.
 
-Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments, Bioinformatics, Volume 40, Issue 6, June 2024.
+Holm, Liisa. *Dali server: structural unification of protein families.* Nucleic acids research 50.W1, 2022.
+
+Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, *RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments.* Bioinformatics, Volume 40, Issue 6, June 2024.
