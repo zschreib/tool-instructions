@@ -58,7 +58,7 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3d-structruture-predictions">3D structruture predictions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#3d-structruture-predictions-using-alphafold3">3D structruture predictions using Alphafold3</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#submission">Submission</a>
     </li>
@@ -72,7 +72,25 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#3d-structruture-comparison">3D structruture comparison</a>
+    <li class="toctree-l2"><a class="reference internal" href="#structural-comparison-with-foldseek">Structural Comparison with Foldseek</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#submission_1">Submission</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#databases">Databases</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mode">Mode</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sensitivity">Sensitivity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_1">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#download_1">Download</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#follow-up_1">Follow up</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
     </li>
@@ -120,7 +138,7 @@ MQTKNGLVPTLRLSFEMTDALASIEQEGLKINLDTLEEIERSYQQEMDDLEVRLKELAQDAVGDTPVNLASPDDRSMLLY
 <pre><code>Ga0531454_000088_18790_18007_20
 YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEKIMLRIAQSYFAVFTSEMRGPMREDFVRRYAEEIAPYLTIMDSVGTSIEELDDYAKLNKPDIIFADQLDKFRIGGEYNRGDERLKQTYVLAREIAKRNKCLVWAVSQASYEAHDRQFIDYSMLDNSRTGKAGEADIIIGIGKTGSSEVENTVRHICISKNKLNGYHGMINSQIDVRRGVYY
 </code></pre>
-<h2 id="3d-structruture-predictions">3D structruture predictions<a class="headerlink" href="#3d-structruture-predictions" title="Permanent link">&para;</a></h2>
+<h2 id="3d-structruture-predictions-using-alphafold3">3D structruture predictions using Alphafold3<a class="headerlink" href="#3d-structruture-predictions-using-alphafold3" title="Permanent link">&para;</a></h2>
 <h3 id="submission">Submission<a class="headerlink" href="#submission" title="Permanent link">&para;</a></h3>
 <p>Once logged in to Alphafold3, you should be directed to the default submission page.</p>
 <p>Paste the <strong>Sequence 1</strong> residues into the input field and select <strong>Protein</strong>, as we are working with amino acid sequences. Set <strong>Copies</strong> to 1 since we are only interested in monomer predictions for this tutorial.</p>
@@ -141,16 +159,44 @@ YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEK
 <p>AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.</p>
 <h3 id="follow-up">Follow up<a class="headerlink" href="#follow-up" title="Permanent link">&para;</a></h3>
 <p>Repeat this process for sequence two. Once you have both model_0.cif for Sequence one and two you can move to the next step. </p>
-<h2 id="3d-structruture-comparison">3D structruture comparison<a class="headerlink" href="#3d-structruture-comparison" title="Permanent link">&para;</a></h2>
+<h2 id="structural-comparison-with-foldseek">Structural Comparison with Foldseek<a class="headerlink" href="#structural-comparison-with-foldseek" title="Permanent link">&para;</a></h2>
+<h3 id="submission_1">Submission<a class="headerlink" href="#submission_1" title="Permanent link">&para;</a></h3>
+<p>After unzipping your AlphaFold3 output and selecting the best model (e.g., fold_sequence_1_test_model_0.cif), head over to the <a href="https://search.foldseek.com/search">Foldseek Search Server</a> to compare your predicted structure against a wide range of structural databases.</p>
+<p>Using the web interface limits some customization compared to running Foldseek locally, but again no coding experience is needed. For a deeper understanding of the Foldseek methods and advanced usage options, it is highly recommended to read through the official documentation:</p>
+<p><a href="https://github.com/steineggerlab/foldseek">Foldseek GitHub Repository</a>
+<a href="https://github.com/steineggerlab/foldseek/wiki">Foldseek Wiki</a></p>
+<p><img alt="Foldseek Homepage" src="../images/foldseek_homepage.png" /></p>
+<p>Once on the Foldseek homepage, navigate to the <strong>Monomer Search</strong> tab (this should be the default view) and upload your <em>protein.cif</em> file of interest.</p>
+<p><img alt="Foldseek Search" src="../images/foldseek_settings.png" /></p>
+<h4 id="databases">Databases<a class="headerlink" href="#databases" title="Permanent link">&para;</a></h4>
+<p>The image above shows the available subject databases and run options you can select. For phage (known and unknown), I typically stick with the parameters shown in the figure. I usually only select the databases highlighted there, but you can experiment with others depending on your research questions. Keep in mind that the more databases you select, the longer the job will take to run.</p>
+<h4 id="mode">Mode<a class="headerlink" href="#mode" title="Permanent link">&para;</a></h4>
+<p>I recommend selecting <strong>TM-align</strong> as the search mode. For more information on the differences between available modes, consult the <a href="https://github.com/steineggerlab/foldseek">Foldseek GitHub documentation</a>.</p>
+<h4 id="sensitivity">Sensitivity<a class="headerlink" href="#sensitivity" title="Permanent link">&para;</a></h4>
+<p>Iterative searching is generally not needed if you are already identifying homologous hits to known sequences. It can increase runtime significantly but may help uncover distant homologs in more unknown sequences.</p>
+<h3 id="results_1">Results<a class="headerlink" href="#results_1" title="Permanent link">&para;</a></h3>
+<p><img alt="Foldseek Results" src="../images/foldseek_results.png" /></p>
+<p>Once your job is complete, the <strong>Results</strong> page will display a list of 1000 top hits for each database you selected, as well as an aggregated view under the <strong>ALL DATABASES</strong> tab, sorted by best scores.</p>
+<p>For this example, we will focus on the top hits in the <strong>BFVD</strong> database. Results are sorted by <strong>TM-align score</strong>, so you can choose the top ranking structure as the best representative. To explore more details, click on the <strong>Target URL</strong> to view the full entry on its dedicated results page. Depending on what you select, this will either redirect you to Foldseek <strong>BFVD</strong> or a Uniref results page. </p>
+<h3 id="download_1">Download<a class="headerlink" href="#download_1" title="Permanent link">&para;</a></h3>
+<p><img alt="Foldseek Top hit" src="../images/foldseek_tophit_example.png" /></p>
+<p>The top hit page is fairly self explanatory. In this example, we can see that our <strong>Sequence 1</strong> test is similar to a DNA polymerase.</p>
+<p>To download the top hit representative structure, click the <strong>PDB</strong> button located above the structure viewer.</p>
+<p><img alt="Foldseek Table" src="../images/foldseek_tophit_table.png" /></p>
+<p>To download the full top hit results table, navigate back to the <strong>Results</strong> page and use the dropdown menu below the hit list to select the desired format for download.</p>
+<h3 id="follow-up_1">Follow up<a class="headerlink" href="#follow-up_1" title="Permanent link">&para;</a></h3>
+<p>You now know how to generate a protein structure using AlphaFold3, perform a structural comparison with TM-align via Foldseek, identify top hits across multiple databases, explore annotations, and download a representative structure.</p>
+<p>However, if you are searching for unknowns and still receive low scores or no informative representatives, a different approach will be needed to further investigate the structure or function.</p>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contributors names and contact info</p>
 <p>zschreib@udel.edu</p>
 <h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
 <p>The tutorial here utilizes tools from various sources:</p>
-<p>Abramson, J et al. Accurate structure prediction of biomolecular interactions with AlphaFold 3. Nature (2024).</p>
+<p>Abramson, J et al. <em>Accurate structure prediction of biomolecular interactions with AlphaFold 3.</em> Nature, 2024.</p>
 <p>van Kempen M, Kim S, Tumescheit C, Mirdita M, Lee J, Gilchrist CLM, Soding J, and Steinegger M.<br />
 <em>Fast and accurate protein structure search with Foldseek.</em> Nature Biotechnology, 2023.</p>
-<p>Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments, Bioinformatics, Volume 40, Issue 6, June 2024.</p>
+<p>Holm, Liisa. <em>Dali server: structural unification of protein families.</em> Nucleic acids research 50.W1, 2022.</p>
+<p>Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, <em>RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments.</em> Bioinformatics, Volume 40, Issue 6, June 2024.</p>
               
             </div>
           </div><footer>
