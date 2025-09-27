@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>PHIDRA - Tools Homepage</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "PHIDRA";
+        var mkdocs_page_input_path = "PHIDRA.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Tools Homepage
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">PHIDRA</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#setting-up-pfam-database-optional">Setting up Pfam Database (Optional)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#creating-an-interproscan-domain-architecture-ida-file">Creating an InterProScan Domain Architecture (IDA) file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-identify-essential-domains">1. Identify essential domains</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-download-domain-architecture-data-in-tsv-format-for-all-or-selected-domain-combinations">2. Download domain architecture data in TSV format for all or selected domain combinations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-sample-ida-file-in-tsv-format">3. Sample IDA file in TSV format:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4-analyze-architectures">4. Analyze architectures</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#5-use-for-validation">5. Use for validation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-the-tool">Running the tool</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results-output-summary">Results output summary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#looking-for-version-1">Looking for Version 1?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ORION/">ORION</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../embedding/">ESM Embedding Tutorial</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../structure/">3D protein structure Tutorial</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Tools Homepage</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">PHIDRA</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-2.0.0_stable-green" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
+<p><strong>P</strong>rotein <strong>H</strong>omology <strong>I</strong>dentification via <strong>D</strong>omain-<strong>R</strong>elated <strong>A</strong>rchitecture</p>
+<p>A simple way to search and validate identified Pfam domains of interest against a curated InterProScan Domain Architecture (IDA) file to check whether or not your proteins match a domain composition found in the InterPro Database.</p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>A Python-based package of scripts that performs an initial homology search using <code>MMseqs2</code> to identify targeted proteins of interest in small or large datasets. Top hits are searched against the Pfam database using <code>pfam_scan</code>, and verified domains are checked and compared against a custom input InterProScan Domain Architecture (IDA) file relative to your target protein of interest. 
+A recursive search is then performed using the full-length proteins with validated IDAs as the subject database and the original input as the query, with initial matches filtered out. This process captures potentially more distant proteins that may have been missed in the initial homology search but are functionally relevant.</p>
+<p>➡️  Official documentation is hosted on <a href="https://zschreib.github.io/tool-instructions/PHIDRA/">PHIDRA</a>.</p>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>phidra</code> can be run either on a machine with a properly set up Python environment or by creating a custom <a href="https://docs.conda.io/en/latest/">Conda</a> environment if you do not wish to change your current setup (recommended).</li>
+<li><a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a> required for initial and recursive homology search. </li>
+<li><a href="http://hmmer.org/documentation.html">HMMER</a> required for Pfam database creation and protein domain identification through <code>pfam_scan</code>.</li>
+<li><a href="https://www.python.org/downloads/">Python</a> &gt;= 3.8 </li>
+</ul>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Conda setup (recommended) <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Help</a></li>
+</ul>
+<pre><code>#Create environment with &gt;= Python 3.8
+conda create --name phidra python=3.8
+
+#Activate environment
+conda activate phidra
+
+#Install hmmer/mmseqs2 (Required)
+conda install -c conda-forge -c bioconda mmseqs2
+conda install bioconda::hmmer
+
+#Clone tool into working directory
+git clone https://github.com/zschreib/phidra
+
+cd phidra
+
+#Grabs required python packages
+pip install -r requirements.txt
+
+</code></pre>
+<ul>
+<li>Python setup &gt;= Python 3.8, requires MMseqs2 and HMMER to be already set up.</li>
+</ul>
+<pre><code>git clone https://github.com/zschreib/phidra
+cd phidra
+pip install -r requirements.txt
+</code></pre>
+<ul>
+<li>Tool and version check. If you receive any errors here, do not proceed until fixed.</li>
+</ul>
+<pre><code>mmseqs -h
+hmmscan -h
+python phidra_run.py -v
+</code></pre>
+<h3 id="setting-up-pfam-database-optional">Setting up Pfam Database (Optional)<a class="headerlink" href="#setting-up-pfam-database-optional" title="Permanent link">&para;</a></h3>
+<ul>
+<li>If you already have a custom or existing Pfam-HMM formatted database you can skip this step. </li>
+<li>You can optionally include the <strong>Pfam-B</strong> database to perform a less restrictive search, which can help identify more remote or novel domain relationships that may be missed by the curated Pfam-A profiles.</li>
+</ul>
+<pre><code>mkdir pfam_database
+cd pfam_database
+
+wget http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.dat.gz
+wget http://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz
+
+gunzip -c Pfam-A.hmm.dat.gz &gt; Pfam-A.hmm.dat
+gunzip -c Pfam-A.hmm.gz &gt; Pfam-A.hmm
+rm Pfam-A.hmm.gz Pfam-A.hmm.dat.gz
+
+hmmpress Pfam-A.hmm
+</code></pre>
+<h2 id="creating-an-interproscan-domain-architecture-ida-file">Creating an InterProScan Domain Architecture (IDA) file<a class="headerlink" href="#creating-an-interproscan-domain-architecture-ida-file" title="Permanent link">&para;</a></h2>
+<h3 id="1-identify-essential-domains">1. Identify essential domains<a class="headerlink" href="#1-identify-essential-domains" title="Permanent link">&para;</a></h3>
+<ul>
+<li>For DNA polymerase A, I have identified PF00476 (DNA_pol_A) as the core domain.</li>
+<li>Search domain on InterPro: <code>https://www.ebi.ac.uk/interpro/entry/pfam/PF00476/domain_architecture/</code> and grab the full IDA profile.</li>
+</ul>
+<h3 id="2-download-domain-architecture-data-in-tsv-format-for-all-or-selected-domain-combinations">2. Download domain architecture data in TSV format for all or selected domain combinations<a class="headerlink" href="#2-download-domain-architecture-data-in-tsv-format-for-all-or-selected-domain-combinations" title="Permanent link">&para;</a></h3>
+<p>File should include (by default):
+* IDA ID (unique hash)
+* Domain combinations
+* Protein counts within IDA
+* Representative sequence
+* Representative length
+* Domain positions/coordinates</p>
+<h3 id="3-sample-ida-file-in-tsv-format">3. Sample IDA file in TSV format:<a class="headerlink" href="#3-sample-ida-file-in-tsv-format" title="Permanent link">&para;</a></h3>
+<pre><code>IDA ID  IDA Text    Unique Proteins Representative Accession    Representative Length   Representative Domains
+82911c7e8cf0ed5121595d5944b2a2f9a2c4f49e    PF02739:IPR020046-PF01367:IPR020045-PF01612:IPR002562-PF00476:IPR001098 22766   P00582  928 PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[9-170],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[171-272],PF01612{DNA_pol_A_exo1}:IPR002562{3'-5'_exonuclease_dom}[330-516],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[551-925]
+d4033548d92ed83469d80faa39cea59a849060a8    PF00476:IPR001098   18435   P00581  704 PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[333-701]
+16983c3a921f1409678537d9977eca4ed176e7c2    PF02739:IPR020046-PF01367:IPR020045-PF22619:IPR054690-PF00476:IPR001098 10607   Q04957  877 PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[4-170],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[172-266],PF22619{DNA_polI_exo1}:IPR054690{DNA_polI_exonuclease}[318-457],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[498-875]
+ce54c2b3dc9b223aa1f4992353c0972accb51c74    PF02739:IPR020046-PF01367:IPR020045-PF00476:IPR001098   6038    O84500  866 PF02739{5_3_exonuc_N}:IPR020046{5-3_exonucl_a-hlix_arch_N}[3-166],PF01367{5_3_exonuc}:IPR020045{DNA_polI_H3TH}[167-259],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[495-865]
+f54dc0def957e931720f1460942192debd6092ca    PF01612:IPR002562-PF00476:IPR001098 4576    Q05254  595 PF01612{DNA_pol_A_exo1}:IPR002562{3'-5'_exonuclease_dom}[19-210],PF00476{DNA_pol_A}:IPR001098{DNA-dir_DNA_pol_A_palm_dom}[243-587]
+</code></pre>
+<h3 id="4-analyze-architectures">4. Analyze architectures<a class="headerlink" href="#4-analyze-architectures" title="Permanent link">&para;</a></h3>
+<p>Core domain (PF00476) commonly associates with:
+* PF02739 (5' exonuclease N-terminal)
+* PF01367 (5' exonuclease)
+* PF01612 (DNA polymerase A exonuclease)</p>
+<h3 id="5-use-for-validation">5. Use for validation<a class="headerlink" href="#5-use-for-validation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Compare unknown or known sequence hits to the subject database against known IDA profiles.</li>
+<li>Explore domain organization and composition.</li>
+</ul>
+<p>Domain architectures help validate protein predictions by ensuring essential functional domains are present, and they also provide structured, functionally meaningful features that can be leveraged as high-quality inputs for machine-learning models to improve training and downstream classification.</p>
+<h2 id="running-the-tool">Running the tool<a class="headerlink" href="#running-the-tool" title="Permanent link">&para;</a></h2>
+<pre><code>usage: phidra_run.py [-h] [-v] -i INPUT_FASTA -db SUBJECT_DB -pfam PFAM_HMM_DB -ida IDA_FILE -f FUNCTION -o OUTPUT_DIR
+                     [-t THREADS] [-e EVALUE]
+
+Identifies homologous proteins and associated Pfam domains from input protein sequences, while comparing against
+InterPro Domain Architectures to analyze domain-level similarities and functional relationships.
+
+Help:
+  -h, --help            Show this help message and exit
+  -v, --version         Show program version and exit
+
+Required arguments:
+  -i INPUT_FASTA, --input_fasta INPUT_FASTA
+                        Query FASTA for mmseqs search (default: None)
+  -db SUBJECT_DB, --subject_db SUBJECT_DB
+                        Subject FASTA for mmseqs createdb (default: None)
+  -pfam PFAM_HMM_DB, --pfam_hmm_db PFAM_HMM_DB
+                        Pfam HMM format database path (default: None)
+  -ida IDA_FILE, --ida_file IDA_FILE
+                        IDA TSV file (default: None)
+  -f FUNCTION, --function FUNCTION
+                        User label for this run (default: None)
+  -o OUTPUT_DIR, --output_dir OUTPUT_DIR
+                        Base output directory (default: None)
+
+Optional arguments:
+  -t THREADS, --threads THREADS
+                        Threads for tools supporting -cpu/--threads (default: 1)
+  -e EVALUE, --evalue EVALUE
+                        E-value threshold for mmseqs easy-search (e.g., 1E-3, 1e-5) (default: 1E-3)
+</code></pre>
+<p>Example run using the provided examples directory:</p>
+<pre><code>python phidra_run.py -i examples/query/polA_test.fa -db examples/subject/pola_16_k12_ref.fa -pfam [pfam_DB_location] -ida examples/IDA/polA_IDA_list.tsv -f examples/output -t 5 -e 1E-3
+</code></pre>
+<h2 id="results-output-summary">Results output summary<a class="headerlink" href="#results-output-summary" title="Permanent link">&para;</a></h2>
+<pre><code>output/
+├── final_results/
+│   ├── pfam_coverage_report.tsv                # Summary of Pfam domain coverage across all search hits
+│   ├── summary.tsv                             # Summary table combining counts for each iteration
+│   ├── unvalidated_ida_pfams/               # Pfam domains found but not validated by iterative domain architecture (IDA)
+│   │   ├── domains.fa                          # FASTA of individual Pfam domain hits
+│   │   ├── full_proteins.fa                    # Full-length proteins containing those domains
+│   │   └── pfam_unvalidated_merged_report.tsv  # Merged table of unvalidated domain results
+│   └── validated_ida_pfams/                 # Pfam domains validated by IDA recursion
+│       ├── domains.fa                          # FASTA of validated Pfam domain hits
+│       ├── full_proteins.fa                    # Full-length proteins containing validated domains
+│       └── pfam_validated_merged_report.tsv    # Merged table of validated domain results
+│
+├── mmseqs/
+│   ├── initial/                             # First-pass MMseqs2 search output
+│   │   ├── bits.tsv                             # Top hit table by best bitscore
+│   │   ├── hits.fa                              # FASTA of sequences with best e-value
+│   │   ├── hits.tsv                             # Top hit table by best e-value
+│   │   └── res.m8                               # MMseqs2 table output (m8 format) for all significant initial hits
+│   └── recursive/                           # Secondary MMseqs2 search using hits as queries
+│       └── res.m8                               # MMseqs2 table output (m8 format) for all significant recursive hits
+│                                                # No recursive hits so tophit/FASTA not created
+└── pfam/
+    ├── initial/                             # Initial Pfam HMMER domain search results
+    │   ├── pfam_coverage_report.tsv             # Coverage summary of initial Pfam search
+    │   ├── unvalidated_ida_report/          # Domains not validated by user IDA but hit Pfam domain
+    │   │   ├── domains.fa                       # FASTA of unvalidated Pfam domain hits
+    │   │   ├── full_proteins.fa                 # Full-length proteins for unvalidated hits
+    │   │   └── pfam_unvalidated_report.tsv      # Tabular report of unvalidated domain results
+    │   └── validated_ida_report/            # Domains validated by IDA
+    │       ├── domains.fa                       # FASTA of validated Pfam domain hits
+    │       ├── full_proteins.fa                 # Full-length proteins for validated hits
+    │       └── pfam_validated_report.tsv        # Tabular report of validated domain results
+    └── recursive/                               # Results from recursive Pfam search
+        (empty)                                  # No recursive hits so pfam files not created
+</code></pre>
+<ul>
+<li>The named output directory contains the complete output of the <code>phidra</code> pipeline.</li>
+<li>Includes homology search results, IDA-validated and unvalidated Pfam domain calls with both sequence-level and domain-level FASTA files, and comprehensive summary tables. </li>
+<li>A detailed description of each file is provided above to help navigate and interpret the results.</li>
+</ul>
+<h2 id="looking-for-version-1">Looking for Version 1?<a class="headerlink" href="#looking-for-version-1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Browse the stable <strong><a href="https://github.com/zschreib/phidra/tree/v1.x">v1.x branch</a></strong>  </li>
+<li>Or check the <strong><a href="https://github.com/zschreib/phidra/releases/tag/v1.0.0">v1.0.0 release</a></strong>  </li>
+</ul>
+<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
+<p>If you found this tool useful, please cite: </p>
+<p>Schreiber, Z. D. PHIDRA: <em>Protein Homology Identification via Domain-Related Architecture</em>. GitHub. Retrieved Sept 27, 2025, from <a href="https://github.com/zschreib/phidra/">https://github.com/zschreib/phidra/</a>.</p>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Contributor’s name and contact info</p>
+<p>zschreib.dev@gmail.com</p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>This project is licensed under the GNU General Public License v3.0 see the LICENSE file for more details.</p>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
+<p>Inspiration, code snippets, etc.
+* <a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a>
+* <a href="https://www.ebi.ac.uk/interpro/">InterPro</a>
+* <a href="https://github.com/aziele/pfam_scan">pfam_scan</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../ORION/" class="btn btn-neutral float-right" title="ORION">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../ORION/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

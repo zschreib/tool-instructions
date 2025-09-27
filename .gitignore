@@ -1,0 +1,2 @@
+# Ignore NFS temp files
+.nfs*

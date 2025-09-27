@@ -1,0 +1,12 @@
+site_name: Tools Homepage
+theme:
+  name: readthedocs
+nav:
+  - Home: index.md
+  - PHIDRA: PHIDRA.md
+  - ORION: ORION.md
+  - ESM Embedding Tutorial: embedding.md
+  - 3D Structure Tutorial: structure.md
+markdown_extensions:
+  - toc:
+      permalink: true
