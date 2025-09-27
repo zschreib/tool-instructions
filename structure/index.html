@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>3D Structure Tutorial - Tools Homepage</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "3D Structure Tutorial";
+        var mkdocs_page_input_path = "structure.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Tools Homepage
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../PHIDRA/">PHIDRA</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../ORION/">ORION</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../embedding/">ESM Embedding Tutorial</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">3D Structure Tutorial</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3d-structruture-predictions-using-alphafold3">3D structruture predictions using Alphafold3</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#submission">Submission</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-job">Run Job</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#download">Download</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#follow-up">Follow up</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#structural-comparison-with-foldseek">Structural Comparison with Foldseek</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#submission_1">Submission</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#databases">Databases</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#mode">Mode</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#sensitivity">Sensitivity</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_1">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#download_1">Download</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#follow-up_1">Follow up</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#structural-comparison-with-dali">Structural Comparison with DALI</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#submission_2">Submission</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#results_2">Results</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#follow-up_2">Follow up</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-sequence-2-analysis">Practice: Sequence 2 Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Tools Homepage</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">3D Structure Tutorial</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="guide-to-generating-and-comparing-3d-protein-structures">Guide to generating and comparing 3D protein structures<a class="headerlink" href="#guide-to-generating-and-comparing-3d-protein-structures" title="Permanent link">&para;</a></h1>
+<p>This tutorial provides a step by step guide for generating 3D structural predictions using the AlphaFold3 web interface and performing structural comparisons using the Foldseek and DALI web server.</p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>No coding knowledge is required. The only setup needed is to create an account on the AlphaFold3 web server: <a href="https://alphafoldserver.com/welcome">https://alphafoldserver.com/welcome</a>.  </p>
+<p>Note that this web interface is not ideal for analyses requiring large batches of 3D predictions (as you are limited to 30 jobs per day) or custom templates, and it enforces fixed parameters. For more advanced and customizable workflows, consider using the open-source version of AlphaFold3: <a href="https://github.com/google-deepmind/alphafold3">https://github.com/google-deepmind/alphafold3</a> though this does require a computational background.</p>
+<p>AlphaFold3 already provides a detailed guide, so please read the official documentation here: <a href="https://alphafoldserver.com/guides">AlphaFold3 Guide</a> before starting to fully understand the web interface.</p>
+<h2 id="getting-started">Getting Started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>For this tutorial, I will demonstrate the output using two sequences. By following this workflow, you will confidently be able to report what they are.</p>
+<p><strong>Sequence 1:</strong></p>
+<pre><code>Ga0531454_000088_17320_15773_17
+MQTKNGLVPTLRLSFEMTDALASIEQEGLKINLDTLEEIERSYQQEMDDLEVRLKELAQDAVGDTPVNLASPDDRSMLLYSRRVTNKQEWAAIFNLGTERRGATVKPKMRRRMSRKEFNRNVGRLTEVVYKTRAERCTNCLGHGRTRVVKKDGTLGKATRVCRVCGGSGVVYHNTHEVAGFKLLPRTTYDLAAAGFRTDKDTLDERRDDLRGDGREFVESYVRYNALRTYLNTFVEGIKNNVDSKGFIHPEFMQCVTATGRLSSRNPNFQNMPRGSTFAIRKVVESRFSGGYILEGDYSQLEFRVAGFLAKDEQAYTDVKNSVDVHNYTASVIGCTRQEAKAHTFKPLYGGTSGTEDQKRYYAAFKDKYAGVTEWHEELQRQAVTKRVIALPSGREYAFPDARWTEYGTATNRTAICNYPVQGFATADLLPIALVSLHNVVKSAGIRSVICNTVHDSIVMDVHPDEKDTCIDLMKHAMLSLPFETMRRYGLAYDMPVGIELKMGKNWLDLHEVEL
+</code></pre>
+<p><strong>Sequence 2:</strong></p>
+<pre><code>Ga0531454_000088_18790_18007_20
+YRVVTNDLDALIDEEVGDPDFPFEFELIREHLPGLDRGNLGILFARPEVGKTTFCSFLAASYVRQGFRVSYWANEEPAEKIMLRIAQSYFAVFTSEMRGPMREDFVRRYAEEIAPYLTIMDSVGTSIEELDDYAKLNKPDIIFADQLDKFRIGGEYNRGDERLKQTYVLAREIAKRNKCLVWAVSQASYEAHDRQFIDYSMLDNSRTGKAGEADIIIGIGKTGSSEVENTVRHICISKNKLNGYHGMINSQIDVRRGVYY
+</code></pre>
+<h2 id="3d-structruture-predictions-using-alphafold3">3D structruture predictions using Alphafold3<a class="headerlink" href="#3d-structruture-predictions-using-alphafold3" title="Permanent link">&para;</a></h2>
+<h3 id="submission">Submission<a class="headerlink" href="#submission" title="Permanent link">&para;</a></h3>
+<p>Once logged in to Alphafold3, you should be directed to the default submission page.</p>
+<p>Paste the <strong>Sequence 1</strong> residues into the input field and select <strong>Protein</strong>, as we are working with amino acid sequences. Set <strong>Copies</strong> to 1 since we are only interested in monomer predictions for this tutorial.</p>
+<p><img alt="AlphaFold3 Submission Page" src="../images/sequence_submission.png" /></p>
+<h3 id="run-job">Run Job<a class="headerlink" href="#run-job" title="Permanent link">&para;</a></h3>
+<p>You can optionally set a <strong>Job Name</strong> to help organize your submissions.  </p>
+<p>If you want reproducible results, set a <strong>Seed</strong> value. The seed controls the random initialization of the model -- using the same seed with the same input will always return the same prediction. If left blank, the server will assign a random seed, which may yield slightly different outputs across runs.</p>
+<p><img alt="AlphaFold3 Run Job" src="../images/sequence_job.png" /></p>
+<p>Click <strong>Confirm and submit job</strong>. The prediction process typically takes 5 to 10 minutes to complete but is largely dependent on the size of the protein.</p>
+<p>Below the sequence submission form is the <strong>Job History</strong> section. Once your job is finished, a checkmark will appear to the left of the job name. Click on the job name to view the 3D structure prediction.</p>
+<h3 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
+<p><img alt="AlphaFold3 Results" src="../images/3d_results.png" /></p>
+<p>All results are displayed on this page. For more detailed explanations of each output, refer back to the guide mentioned at the beginning.</p>
+<p>The most important score here is the <strong>pTM</strong> (Predicted TM-score). Generally, a score above 0.5 suggests a predicted fold that may resemble one of the templates in the PDB. If you are seeing a lot of red and orange with a low <strong>pTM</strong> you may not want to use this structure. </p>
+<p>The <strong>ipTM</strong> (interface predicted TM-score) is currently blank because we are not modeling protein-protein interactions in this tutorial.</p>
+<h3 id="download">Download<a class="headerlink" href="#download" title="Permanent link">&para;</a></h3>
+<p>Click the <strong>Download</strong> button at the top of the results page and unzip the directory to access the Crystallographic Information Files (.cif), which contain the atomic structure data.</p>
+<p>AlphaFold3 returns five sets of predictions, labeled model_0 through model_4, along with their corresponding confidence scores in the summary_confidences_0-4 files. In practice, model_0 often contains the best prediction, but it is a good idea to review all confidence scores to confirm.</p>
+<h3 id="follow-up">Follow up<a class="headerlink" href="#follow-up" title="Permanent link">&para;</a></h3>
+<p>Repeat this process for sequence two. Once you have both model_0.cif for <strong>Sequence 1</strong> and two you can move to the next step. </p>
+<h2 id="structural-comparison-with-foldseek">Structural Comparison with Foldseek<a class="headerlink" href="#structural-comparison-with-foldseek" title="Permanent link">&para;</a></h2>
+<p>Foldseek is a fast and scalable tool for comparing protein 3D structures by aligning them using structural similarity, enabling high throughput searches across large structure databases.</p>
+<h3 id="submission_1">Submission<a class="headerlink" href="#submission_1" title="Permanent link">&para;</a></h3>
+<p>After unzipping your AlphaFold3 output and selecting the best model (e.g., fold_sequence_1_test_model_0.cif), head over to the <a href="https://search.foldseek.com/search">Foldseek Search Server</a> to compare your predicted structure against a wide range of structural databases.</p>
+<p>Using the web interface limits some customization compared to running Foldseek locally, but again no coding experience is needed. For a deeper understanding of the Foldseek methods and advanced usage options, it is highly recommended to read through the official documentation:</p>
+<p><a href="https://github.com/steineggerlab/foldseek">Foldseek GitHub Repository</a></p>
+<p><a href="https://github.com/steineggerlab/foldseek/wiki">Foldseek Wiki</a></p>
+<p><img alt="Foldseek Homepage" src="../images/foldseek_homepage.png" /></p>
+<p>Once on the Foldseek homepage, navigate to the <strong>Monomer Search</strong> tab (this should be the default view) and upload your <em>protein.cif</em> file of interest.</p>
+<p><img alt="Foldseek Search" src="../images/foldseek_settings.png" /></p>
+<h4 id="databases">Databases<a class="headerlink" href="#databases" title="Permanent link">&para;</a></h4>
+<p>The image above shows the available subject databases and run options you can select. For phage (known and unknown), I typically stick with the parameters shown in the figure. I usually only select the databases highlighted there, but you can experiment with others depending on your research questions. Keep in mind that the more databases you select, the longer the job will take to run.</p>
+<h4 id="mode">Mode<a class="headerlink" href="#mode" title="Permanent link">&para;</a></h4>
+<p>I recommend selecting <strong>TM-align</strong> as the search mode. For more information on the differences between available modes, consult the <a href="https://github.com/steineggerlab/foldseek">Foldseek GitHub documentation</a>.</p>
+<h4 id="sensitivity">Sensitivity<a class="headerlink" href="#sensitivity" title="Permanent link">&para;</a></h4>
+<p>Iterative searching is generally not needed if you are already identifying homologous hits to known sequences. It can increase runtime significantly but may help uncover distant homologs in more unknown sequences.</p>
+<h3 id="results_1">Results<a class="headerlink" href="#results_1" title="Permanent link">&para;</a></h3>
+<p><img alt="Foldseek Results" src="../images/foldseek_results.png" /></p>
+<p>Once your job is complete, the <strong>Results</strong> page will display a list of 1000 top hits for each database you selected, as well as an aggregated view under the <strong>ALL DATABASES</strong> tab, sorted by best scores.</p>
+<p>For this example, we will focus on the top hits in the <strong>BFVD</strong> database. Results are sorted by <strong>TM-align score</strong>, so you can choose the top ranking structure as the best representative. To explore more details, click on the <strong>Target URL</strong> to view the full entry on its dedicated results page. Depending on what you select, this will either redirect you to Foldseek <strong>BFVD</strong> or a Uniref results page. </p>
+<h3 id="download_1">Download<a class="headerlink" href="#download_1" title="Permanent link">&para;</a></h3>
+<p><img alt="Foldseek Top hit" src="../images/foldseek_tophit_example.png" /></p>
+<p>The top hit page is fairly self explanatory. In this example, we can see that our <strong>Sequence 1</strong> test is similar to a DNA polymerase.</p>
+<p>To download the top hit representative structure, click the <strong>PDB</strong> button located above the structure viewer.</p>
+<p><img alt="Foldseek Table" src="../images/foldseek_tophit_table.png" /></p>
+<p>To download the full top hit results table, navigate back to the <strong>Results</strong> page and use the dropdown menu to the left of the hit list and select the desired format for download.</p>
+<h3 id="follow-up_1">Follow up<a class="headerlink" href="#follow-up_1" title="Permanent link">&para;</a></h3>
+<p>You now know how to generate a protein structure using AlphaFold3, perform a structural comparison with TM-align via Foldseek, identify top hits across multiple databases, explore annotations, and download a representative structure.</p>
+<p>However, if you are searching for unknowns and still receive low scores or no informative representatives, a different approach will be needed to further investigate the structure or function.</p>
+<h2 id="structural-comparison-with-dali">Structural Comparison with DALI<a class="headerlink" href="#structural-comparison-with-dali" title="Permanent link">&para;</a></h2>
+<p>DALI (Distance matrix ALIgnment) compares protein structures based on intramolecular distance patterns to detect structural similarities, even among distantly related proteins.</p>
+<h3 id="submission_2">Submission<a class="headerlink" href="#submission_2" title="Permanent link">&para;</a></h3>
+<p>If you are still interested in exploring your sequence of interest and did not find informative hits using Foldseek, you can try the <a href="http://ekhidna2.biocenter.helsinki.fi/dali/">DALI webserver</a>.</p>
+<p><img alt="DALI Submission" src="../images/dali_homepage.png" /></p>
+<p>In this example, I search <strong>Sequence 1</strong> against the <strong>Protein Data Bank (PDB)</strong> using <strong>PDB Search</strong> by uploading a <em>.pdb</em> file and providing a <strong>Job title</strong> and <strong>Email address</strong> to receive the results.</p>
+<p><strong>Important:</strong><br />
+DALI does not accept <em>.cif</em> files, so you must convert your AlphaFold3 output to <em>.pdb</em> format before submitting. You can write your own script or use this online converter:  </p>
+<p><a href="https://project-gemmi.github.io/wasm/convert/cif2pdb.html">.cif -&gt; to -&gt; .pdb converter</a></p>
+<h3 id="results_2">Results<a class="headerlink" href="#results_2" title="Permanent link">&para;</a></h3>
+<p>You should receive an email with the results in about 5 to 10 minutes. Alternatively, the submission page may redirect you directly to the results once processing is complete if you have the tab open.</p>
+<p>A detailed explanation of the DALI output can be found in the following guide:</p>
+<p><a href="http://ekhidna2.biocenter.helsinki.fi/dali/DaliTutorial2022.pdf">DALI Tutorial 2022 (PDF)</a></p>
+<p>For that reason, I will not go into detail here about how to interpret the output.</p>
+<p><img alt="DALI Results Page" src="../images/dali_output_1.png" /></p>
+<p>Whether through the page redirection or the email link, you will be taken to the DALI results page. From here, you can explore individual hits or download the full results table.</p>
+<p>For this tutorial, we will focus on the <strong>Matches against full PDB</strong> section to get a comprehensive view of structural similarities.</p>
+<p><img alt="DALI Results Table" src="../images/dali_output_2.png" /></p>
+<p>The DALI results table summarizes structural alignments between your query and known protein structures. Key columns include:</p>
+<p><strong>Z</strong>: Statistical significance of the alignment (higher = more confident match)</p>
+<p><strong>RMSD</strong>: Root-mean-square deviation between aligned structures</p>
+<p><strong>%ID</strong>: Percent sequence identity</p>
+<p><strong>PDB</strong>: Link to the matched PDB entry</p>
+<p><strong>Description</strong>: Functional annotation of the hit</p>
+<p>In this example, the top hits all align to <strong>DNA polymerase</strong> proteins, suggesting strong structural similarity with the query sequence.</p>
+<p>The top hit aligns with the <strong>1kfd-A</strong> chain, showing a high <strong>Z-score</strong> and a moderately low <strong>RMSD</strong>, which suggests similar function but some degree of structural divergence in the fold.</p>
+<p>You can look up this complex on the <strong>RCSB PDB</strong> to view the full crystal structure along with other metadata:</p>
+<p><a href="https://www.rcsb.org/structure/1KFD">https://www.rcsb.org/structure/1KFD</a></p>
+<h3 id="follow-up_2">Follow up<a class="headerlink" href="#follow-up_2" title="Permanent link">&para;</a></h3>
+<p>This section provides a way to search for more remote homology by using <strong>Z-score</strong> and <strong>RMSD</strong> values to assess fold similarity. Even when sequence identity is low, high Z-scores with reasonable RMSD values can indicate structural conservation. This can help refine your hypothesis about protein function. Follow-up analyses, such as structural alignments, allow you to precisely identify which regions of your unknown structure align with known proteins, offering deeper insight into potential roles and evolutionary relationships.</p>
+<h2 id="practice-sequence-2-analysis">Practice: Sequence 2 Analysis<a class="headerlink" href="#practice-sequence-2-analysis" title="Permanent link">&para;</a></h2>
+<p>Try running this workflow with <strong>Sequence 2</strong> to see if you can generate a confident structural prediction. Based on the Foldseek or DALI results, assess whether any functional or structural annotations can be confidently assigned.</p>
+<p>If you are curious whether <strong>Sequence 2</strong> may physically interact with <strong>Sequence 1</strong>, consider testing them together using <strong>AlphaFold3 Multimer</strong>, which is designed to predict protein-protein complexes.</p>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Contributors names and contact info</p>
+<p>zschreib@udel.edu</p>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
+<p>The tutorial here utilizes tools from various sources:</p>
+<p>Abramson, J et al. <em>Accurate structure prediction of biomolecular interactions with AlphaFold 3.</em> Nature, 2024.</p>
+<p>van Kempen M, Kim S, Tumescheit C, Mirdita M, Lee J, Gilchrist CLM, Soding J, and Steinegger M.<br />
+<em>Fast and accurate protein structure search with Foldseek.</em> Nature Biotechnology, 2023.</p>
+<p>Holm, Liisa. <em>Dali server: structural unification of protein families.</em> Nucleic acids research 50.W1, 2022.</p>
+<p>Sebastian Bittrich, Joan Segura, Jose M Duarte, Stephen K Burley, Yana Rose, <em>RCSB protein Data Bank: exploring protein 3D similarities via comprehensive structural alignments.</em> Bioinformatics, Volume 40, Issue 6, June 2024.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../embedding/" class="btn btn-neutral float-left" title="ESM Embedding Tutorial"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../embedding/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

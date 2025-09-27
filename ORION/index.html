@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>ORION - Tools Homepage</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "ORION";
+        var mkdocs_page_input_path = "ORION.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Tools Homepage
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../PHIDRA/">PHIDRA</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">ORION</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#running-orion">Running ORION</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#results">Results</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#network-visuals">Network Visuals</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#citation">Citation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#authors">Authors</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#license">License</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acknowledgments">Acknowledgments</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../embedding/">ESM Embedding Tutorial</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../structure/">3D Structure Tutorial</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Tools Homepage</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">ORION</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="orf-interaction-ontology-network-orion">ORf Interaction Ontology Network (ORION) <img alt="Version" src="https://img.shields.io/badge/version-0.80_beta-blue" /><a class="headerlink" href="#orf-interaction-ontology-network-orion" title="Permanent link">&para;</a></h1>
+<p>ORf Interaction Ontology Network (ORION), a computational framework designed to explore patterns of protein cluster (PC) organization across genomes, contigs, or viral operational taxonomic unit (vOTU) sequences. </p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
+<p>ORION detects shared genomic features by analyzing the local arrangement of protein clusters (PCs) around each open reading frame (ORF). It maps each ORF position to its corresponding PC, then defines cluster blocks (CBs) using a sliding window of user-specified length. For example, a window size of three includes the focal PC plus its immediate neighbors; larger windows capture more distant PCs. By comparing the relative order of PCs within each window, ORION maintains consistent pattern matching even when ORFs shift due to rearrangements. Increasing the window size tightens the required cluster arrangement, revealing more highly conserved synteny across genomes.</p>
+<h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>orion</code> can be ran either on a machine with a properly set up python environment or by creating a custom <a href="https://docs.conda.io/en/latest/">Conda</a> environment if you do not wish to change your current setup (recommended).</li>
+</ul>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
+<ul>
+<li>I recommend using <strong>Mamba</strong> for faster dependency resolution; see the <a href="https://mamba.readthedocs.io/en/latest/">Mamba installation guide</a>. If you prefer <strong>Conda</strong>, refer to the <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda installation guide</a>.</li>
+</ul>
+<pre><code>#Retrieve repo
+git clone https://github.com/zschreib/orion
+cd orion
+
+#Create environment (conda may be slow)
+mamba env create -f environment.yml
+
+#Activate environment
+
+mamba activate orion 
+#OR
+conda activate orion
+</code></pre>
+<ul>
+<li>Tool Check. If you recieve any errors here do not proceede until fixed.</li>
+</ul>
+<pre><code>mmseqs -h
+prodigal -h
+#Make sure version matches main branch.
+python main.py --version
+</code></pre>
+<h2 id="running-orion">Running ORION<a class="headerlink" href="#running-orion" title="Permanent link">&para;</a></h2>
+<pre><code>usage: main.py [-h] -i INPUT -p PREFIX [--min-seq-id MIN_SEQ_ID] [-cb CLUSTER_BLOCK] [-min MIN_GENOMES] [-jci JACCARD] [-t THREADS] [-f {graphml,csv}] [--version]
+
+Pipeline: preprocess FASTA and run ORION into one results folder
+
+options:
+  -h, --help            show this help message and exit
+  -i, --input INPUT     Path to input FASTA file. Nucleotide genomes/contigs.
+  -p, --prefix PREFIX   Base name for results directory (creates &lt;prefix&gt;_results)
+  --min-seq-id MIN_SEQ_ID
+                        MMseqs2 min amino acid sequence identity for clustering. Default = 0.3 or 30%. 
+  -cb, --cluster-block CLUSTER_BLOCK
+                        Cluster block size for ORION. Default = 3.
+  -min, --min-genomes MIN_GENOMES
+                        Minimum genomes for conserved cluster-block. Default = 5.
+  -jci, --jaccard JACCARD
+                        Jaccard threshold for cluster block co-occurrence visual. Default = 0.25.
+  -t, --threads THREADS
+                        Number of worker threads for ORION. Default = 1
+  -f, --format {graphml,csv}
+                        Output format for networks. Recommend csv for Cosmograph or graphml for Cytoscape. Default csv.
+  --version             Show program version and exit. 
+</code></pre>
+<ul>
+<li><strong>Example run:</strong> ORION applied to the NCBI test dataset, which contains 48 phage genomes (16 Klebsiella, 16 Staphylococcus, and 16 Salmonella phage).</li>
+</ul>
+<pre><code>python main.py -i NCBI_test_input/kleb_sal_staph_48_phage.fasta  -p NCBI_test --min-seq-id 0.3 -cb 3 -min 3 -f csv
+</code></pre>
+<p><strong>Process parameters:</strong> clusters amino acid ORFs at 30% identity (<code>--min-seq-id 0.3</code>), generates cluster blocks of size 3 (<code>-cb 3</code>), retains blocks found in =3 genomes (<code>--min 3</code>), saves output to a prefix-named directory (<code>-p</code>), and exports networks in CSV format (<code>-f csv</code>). To see more options use (<code>python main.py -h</code>).</p>
+<h2 id="results">Results<a class="headerlink" href="#results" title="Permanent link">&para;</a></h2>
+<pre><code>NCBI_test_results/
++-- NCBI_test_job_logs.txt
++-- orion_output
+|   +-- analysis_data
+|   |   +-- block_enrichment_scores.tsv
+|   |   +-- block_jaccard_scores.tsv
+|   |   +-- genome_enriched_blocks.tsv
+|   +-- networks
+|       +-- cluster_block_jaccard_metadata.csv
+|       +-- cluster_block_jaccard_network.csv
+|       +-- genome_to_cb_metadata.csv
+|       +-- genome_to_cb_network.csv
++-- preprocess_output
+    +-- NCBI_test_cluster_blocks.tsv
+    +-- NCBI_test_mmseqs_cluster_membership.tsv
+    +-- NCBI_test_orf_metadata.tsv
+    +-- NCBI_test_orfs.pep
+</code></pre>
+<p>More details on each output files will be provided soon. </p>
+<h2 id="network-visuals">Network Visuals<a class="headerlink" href="#network-visuals" title="Permanent link">&para;</a></h2>
+<p>Depending on the chosen format (-f), networks can be visualized in Cytoscape or Cosmograph. Since Cosmograph does not accept GraphML, we will use CSV files:</p>
+<ol>
+<li>
+<p><strong>Open Cosmograph:</strong><br />
+   Go to <a href="https://cosmograph.app/run/">Cosmograph</a>.</p>
+</li>
+<li>
+<p><strong>Upload files:</strong>  </p>
+</li>
+<li>Drag <code>genome_to_cb_network.csv</code> into <strong>Select data file</strong>  </li>
+<li>
+<p>Drag <code>genome_to_cb_metadata.csv</code> into <strong>Select metadata file</strong></p>
+</li>
+<li>
+<p><strong>Map columns:</strong>  </p>
+</li>
+<li>Set <strong>Source column</strong> ? <code>Source</code>  </li>
+<li>
+<p>Set <strong>Target column</strong> ? <code>Target</code></p>
+</li>
+<li>
+<p><strong>Launch the network:</strong><br />
+   Click <strong>Launch</strong> to render the graph.</p>
+</li>
+<li>
+<p><strong>Color nodes by syntenome:</strong><br />
+   In the left panel under <strong>Node color by</strong>, choose <strong>metadata | syntenome</strong>.<br />
+   This will color genomes based on shared cluster block composition (syntenomes) and leave cluster block nodes gray. Highly shared blocks will draw their connected genomes toward the center.</p>
+</li>
+</ol>
+<p><img alt="ORION example" src="https://raw.githubusercontent.com/zschreib/orion/main/NCBI_test_input/ORION_example.png" /></p>
+<h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
+<p>If you found this tool useful, please cite: </p>
+<p>Schreiber, Z. D. ORION: <em>ORf Interaction Ontology Network</em>. GitHub. Retrieved July 29, 2025, from <a href="https://github.com/zschreib/orion/">https://github.com/zschreib/orion/</a>.</p>
+<h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
+<p>Contributors names and contact info.</p>
+<p>zschreib@udel.edu</p>
+<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
+<p>This project is licensed under the GNU General Public License v3.0 see the LICENSE file for details</p>
+<h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
+<p>Visuals provided by <a href="https://cosmograph.app/">Cosmograph</a></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../PHIDRA/" class="btn btn-neutral float-left" title="PHIDRA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../embedding/" class="btn btn-neutral float-right" title="ESM Embedding Tutorial">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../PHIDRA/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../embedding/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
