@@ -179,11 +179,11 @@ The DALI results table summarizes structural alignments between your query and k
 
 In this example, the top hits all align to **DNA polymerase** proteins, suggesting strong structural similarity with the query sequence.
 
-The top hit aligns with the **8src-D** chain, showing a high **Z-score (31.4)** and a moderately low **RMSD (2.3)**, which suggests similar function but some degree of structural divergence in the fold.
+The top hit aligns with the **8scr-D** chain, showing a high **Z-score (31.4)** and a moderately low **RMSD (2.3)**, which suggests similar function but some degree of structural divergence in the fold.
 
 You can look up this complex on the **RCSB PDB** to view the full crystal structure along with other metadata:
 
-[https://www.rcsb.org/structure/1KFD](https://www.rcsb.org/structure/1KFD)
+[https://www.rcsb.org/structure/1KFD](https://www.rcsb.org/sequence/8SCR)
 
 ### Follow up
 
