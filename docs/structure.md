@@ -183,7 +183,7 @@ The top hit aligns with the **8scr-D** chain, showing a high **Z-score (31.4)** 
 
 You can look up this complex on the **RCSB PDB** to view the full crystal structure along with other metadata:
 
-[https://www.rcsb.org/structure/1KFD](https://www.rcsb.org/sequence/8SCR)
+[https://www.rcsb.org/3d-view/8SCR](https://www.rcsb.org/sequence/8SCR)
 
 ### Follow up
 
