@@ -124,13 +124,12 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-2.0.0_stable-green" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
+                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-brightgreen" /> <img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
 <p><strong>P</strong>rotein <strong>H</strong>omology <strong>I</strong>dentification via <strong>D</strong>omain-<strong>R</strong>elated <strong>A</strong>rchitecture</p>
 <p>A simple way to search and validate identified Pfam domains of interest against a curated InterProScan Domain Architecture (IDA) file to check whether or not your proteins match a domain composition found in the InterPro Database.</p>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
 <p>A Python-based package of scripts that performs an initial homology search using <code>MMseqs2</code> to identify targeted proteins of interest in small or large datasets. Top hits are searched against the Pfam database using <code>pfam_scan</code>, and verified domains are checked and compared against a custom input InterProScan Domain Architecture (IDA) file relative to your target protein of interest. 
 A recursive search is then performed using the full-length proteins with validated IDAs as the subject database and the original input as the query, with initial matches filtered out. This process captures potentially more distant proteins that may have been missed in the initial homology search but are functionally relevant.</p>
-<p>➡️  Official documentation is hosted on <a href="https://zschreib.github.io/tool-instructions/PHIDRA/">PHIDRA</a>.</p>
 <h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
 <h3 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h3>
 <ul>
@@ -309,7 +308,10 @@ Optional arguments:
 </ul>
 <h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
 <p>If you found this tool useful, please cite: </p>
-<p>Schreiber, Z. D. PHIDRA: <em>Protein Homology Identification via Domain-Related Architecture</em>. GitHub. Retrieved Sept 27, 2025, from <a href="https://github.com/zschreib/phidra/">https://github.com/zschreib/phidra/</a>.</p>
+<p><strong>Primary reference (method):</strong><br />
+Schreiber, Zachary D. <em>Unraveling Viral Gene Associations Through Integrative Computational Approaches.</em> PhD dissertation, University of Delaware, 2025.</p>
+<p><strong>Software (implementation and version used):</strong><br />
+Schreiber, Zachary D. PHIDRA: Protein Homology Identification via Domain-Related Architecture (version 2.0) [Computer software]. GitHub. https://github.com/zschreib/phidra</p>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contributor’s name and contact info</p>
 <p>zschreib.dev@gmail.com</p>
