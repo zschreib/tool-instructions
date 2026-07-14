@@ -73,8 +73,18 @@
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#running-the-tool">Running the tool</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#custom-mmseqs-output-columns-and-search-behavior">Custom mmseqs output columns and search behavior</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#results-output-summary">Results output summary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#changelog">Changelog</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#v210">v2.1.0</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#looking-for-version-1">Looking for Version 1?</a>
     </li>
@@ -124,7 +134,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-2.0.0-brightgreen" /> <img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
+                <h1 id="phidra">PHIDRA <img alt="Version" src="https://img.shields.io/badge/version-2.1.0-brightgreen" /> <img alt="Status" src="https://img.shields.io/badge/status-stable-brightgreen" /><a class="headerlink" href="#phidra" title="Permanent link">&para;</a></h1>
 <p><strong>P</strong>rotein <strong>H</strong>omology <strong>I</strong>dentification via <strong>D</strong>omain-<strong>R</strong>elated <strong>A</strong>rchitecture</p>
 <p>A simple way to search and validate identified Pfam domains of interest against a curated InterProScan Domain Architecture (IDA) file to check whether or not your proteins match a domain composition found in the InterPro Database.</p>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
@@ -159,7 +169,6 @@ cd phidra
 
 #Grabs required python packages
 pip install -r requirements.txt
-
 </code></pre>
 <ul>
 <li>Python setup &gt;= Python 3.8, requires MMseqs2 and HMMER to be already set up.</li>
@@ -227,7 +236,8 @@ f54dc0def957e931720f1460942192debd6092ca    PF01612:IPR002562-PF00476:IPR001098 
 <p>Domain architectures help validate protein predictions by ensuring essential functional domains are present, and they also provide structured, functionally meaningful features that can be leveraged as high-quality inputs for machine-learning models to improve training and downstream classification.</p>
 <h2 id="running-the-tool">Running the tool<a class="headerlink" href="#running-the-tool" title="Permanent link">&para;</a></h2>
 <pre><code>usage: phidra_run.py [-h] [-v] -i INPUT_FASTA -db SUBJECT_DB -pfam PFAM_HMM_DB -ida IDA_FILE -f FUNCTION -o OUTPUT_DIR
-                     [-t THREADS] [-e EVALUE]
+                     [-t THREADS] [-e EVALUE] [-x COL1,COL2,...] [-a {0,1,2,3,4}]
+                     [-s SENSITIVITY]
 
 Identifies homologous proteins and associated Pfam domains from input protein sequences, while comparing against
 InterPro Domain Architectures to analyze domain-level similarities and functional relationships.
@@ -255,12 +265,28 @@ Optional arguments:
                         Threads for tools supporting -cpu/--threads (default: 1)
   -e EVALUE, --evalue EVALUE
                         E-value threshold for mmseqs easy-search (e.g., 1E-3, 1e-5) (default: 1E-3)
+  -x COL1,COL2,..., --extra_columns COL1,COL2,...
+                        Comma-separated extra mmseqs --format-output columns appended after
+                        the fixed base columns (e.g. qcov,tcov or qaln,taln). See the mmseqs2
+                        wiki for valid column names (default: )
+  -a {0,1,2,3,4}, --alignment_mode {0,1,2,3,4}
+                        mmseqs --alignment-mode (default: mmseqs' own default for easy-search).
+                        Use 3 or higher for real (not estimated) sequence identity, or if
+                        --extra_columns requests alignment-dependent fields like qaln/taln/cigar
+                        (default: None)
+  -s SENSITIVITY, --sensitivity SENSITIVITY
+                        mmseqs -s sensitivity (default: mmseqs' own default) (default: None)
 </code></pre>
-<p>Example run using the provided examples directory:</p>
-<pre><code>python phidra_run.py -i examples/query/polA_test.fa -db examples/subject/pola_16_k12_ref.fa -pfam [pfam_DB_location] -ida examples/IDA/polA_IDA_list.tsv -f examples/output -t 5 -e 1E-3
+<p>Test run using the provided example directory:</p>
+<pre><code>python phidra_run.py -i examples/query/polA_test.fa -db examples/subject/pola_16_k12_ref.fa -pfam [pfamDB_dir_location] -ida examples/IDA/polA_IDA_list.tsv -f polA -o examples/output_default
 </code></pre>
+<h3 id="custom-mmseqs-output-columns-and-search-behavior">Custom mmseqs output columns and search behavior<a class="headerlink" href="#custom-mmseqs-output-columns-and-search-behavior" title="Permanent link">&para;</a></h3>
+<p>If you need extra columns in the mmseqs output (e.g. query/target coverage) or want to change how mmseqs computes alignments, <code>-x/--extra_columns</code>, <code>-a/--alignment_mode</code>, and <code>-s/--sensitivity</code> are passed straight through to <code>mmseqs easy-search</code>. The 12 default columns are always kept first and in the same order, so <code>-x</code> only ever appends new columns; it never reorders or removes the defaults.</p>
+<pre><code>python phidra_run.py -i examples/query/polA_test.fa -db examples/subject/pola_16_k12_ref.fa -pfam [pfamDB_dir_location] -ida examples/IDA/polA_IDA_list.tsv -f polA -o examples/output_custom -t 5 -e 1E-6 -x qcov,tcov,qlen,tlen -a 3 -s 7
+</code></pre>
+<p>This adds <code>qcov</code>, <code>tcov</code>, <code>qlen</code>, and <code>tlen</code> as extra columns in <code>hits.tsv</code>/<code>bits.tsv</code>, and sets <code>--alignment-mode 3 (slower)</code> so mmseqs reports real sequence identity (<code>numIdentical/alnLen</code>) instead of the estimated identity <code>easy-search</code> uses by default.</p>
 <h2 id="results-output-summary">Results output summary<a class="headerlink" href="#results-output-summary" title="Permanent link">&para;</a></h2>
-<pre><code>output/
+<pre><code>output_default/polA
 ├── final_results/
 │   ├── pfam_coverage_report.tsv                # Summary of Pfam domain coverage across all search hits
 │   ├── summary.tsv                             # Summary table combining counts for each iteration
@@ -268,7 +294,7 @@ Optional arguments:
 │   │   ├── domains.fa                          # FASTA of individual Pfam domain hits
 │   │   ├── full_proteins.fa                    # Full-length proteins containing those domains
 │   │   └── pfam_unvalidated_merged_report.tsv  # Merged table of unvalidated domain results
-│   └── validated_ida_pfams/                 # Pfam domains validated by IDA recursion
+│   └── validated_ida_pfams/                 # Pfam domains validated by IDA file
 │       ├── domains.fa                          # FASTA of validated Pfam domain hits
 │       ├── full_proteins.fa                    # Full-length proteins containing validated domains
 │       └── pfam_validated_merged_report.tsv    # Merged table of validated domain results
@@ -280,8 +306,7 @@ Optional arguments:
 │   │   ├── hits.tsv                             # Top hit table by best e-value
 │   │   └── res.m8                               # MMseqs2 table output (m8 format) for all significant initial hits
 │   └── recursive/                           # Secondary MMseqs2 search using hits as queries
-│       └── res.m8                               # MMseqs2 table output (m8 format) for all significant recursive hits
-│                                                # No recursive hits so tophit/FASTA not created
+│       └── res.m8                               # MMseqs2 table output (m8 format) for all significant recursive hits (Empty if no hits found)
 └── pfam/
     ├── initial/                             # Initial Pfam HMMER domain search results
     │   ├── pfam_coverage_report.tsv             # Coverage summary of initial Pfam search
@@ -294,24 +319,32 @@ Optional arguments:
     │       ├── full_proteins.fa                 # Full-length proteins for validated hits
     │       └── pfam_validated_report.tsv        # Tabular report of validated domain results
     └── recursive/                               # Results from recursive Pfam search
-        (empty)                                  # No recursive hits so pfam files not created
+        (If empty)                               # No recursive hits so pfam files not created
 </code></pre>
 <ul>
 <li>The named output directory contains the complete output of the <code>phidra</code> pipeline.</li>
 <li>Includes homology search results, IDA-validated and unvalidated Pfam domain calls with both sequence-level and domain-level FASTA files, and comprehensive summary tables. </li>
 <li>A detailed description of each file is provided above to help navigate and interpret the results.</li>
 </ul>
+<h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
+<h3 id="v210">v2.1.0<a class="headerlink" href="#v210" title="Permanent link">&para;</a></h3>
+<p><strong>Added</strong>
+- <code>-x</code>/<code>--extra_columns</code>: append extra mmseqs <code>--format-output</code> accepted columns (e.g. <code>qcov,tcov</code>) after the fixed default 12. The default columns are always kept first and in order, so existing scripts parsing <code>hits.tsv</code>/<code>bits.tsv</code> by position are unaffected.
+- <code>-a</code>/<code>--alignment_mode</code>: sets mmseqs <code>--alignment-mode</code>. In particular, <code>-a 3</code> switches from <code>easy-search</code>'s default estimated sequence identity to real identity (<code>numIdentical/alnLen</code>).
+- <code>-s</code>/<code>--sensitivity</code>: sets mmseqs <code>-s</code> sensitivity. (<code>-s 1: Highly accelerated search, -s 7.5: Sensitive for finding remote homologs at the cost of longer computation times.</code>)</p>
+<p><strong>Notes</strong>
+- A run without <code>-x</code>/<code>-a</code>/<code>-s</code> produces output identical to v2.0.0.</p>
 <h2 id="looking-for-version-1">Looking for Version 1?<a class="headerlink" href="#looking-for-version-1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Browse the stable <strong><a href="https://github.com/zschreib/phidra/tree/v1.x">v1.x branch</a></strong>  </li>
-<li>Or check the <strong><a href="https://github.com/zschreib/phidra/releases/tag/v1.0.0">v1.0.0 release</a></strong>  </li>
+<li>Browse the stable <strong><a href="https://github.com/zschreib/phidra/tree/v1.x">v1.x branch</a></strong></li>
+<li>Or check the <strong><a href="https://github.com/zschreib/phidra/releases/tag/v1.0.0">v1.0.0 release</a></strong></li>
 </ul>
 <h2 id="citation">Citation<a class="headerlink" href="#citation" title="Permanent link">&para;</a></h2>
 <p>If you found this tool useful, please cite: </p>
-<p><strong>Primary reference (method):</strong><br />
+<p><strong>Primary reference (method):</strong>
 Schreiber, Zachary D. <em>Unraveling Viral Gene Associations Through Integrative Computational Approaches.</em> PhD dissertation, University of Delaware, 2025.</p>
-<p><strong>Software (implementation and version used):</strong><br />
-Schreiber, Zachary D. PHIDRA: Protein Homology Identification via Domain-Related Architecture (version 2.0) [Computer software]. GitHub. https://github.com/zschreib/phidra</p>
+<p><strong>Software (implementation and version used):</strong>
+Schreiber, Zachary D. PHIDRA: Protein Homology Identification via Domain-Related Architecture (version 2.1.0) [Computer software]. GitHub. https://github.com/zschreib/phidra</p>
 <h2 id="authors">Authors<a class="headerlink" href="#authors" title="Permanent link">&para;</a></h2>
 <p>Contributor’s name and contact info</p>
 <p>zschreib.dev@gmail.com</p>
@@ -319,9 +352,9 @@ Schreiber, Zachary D. PHIDRA: Protein Homology Identification via Domain-Related
 <p>This project is licensed under the GNU General Public License v3.0 see the LICENSE file for more details.</p>
 <h2 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h2>
 <p>Inspiration, code snippets, etc.
-* <a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a>
-* <a href="https://www.ebi.ac.uk/interpro/">InterPro</a>
-* <a href="https://github.com/aziele/pfam_scan">pfam_scan</a></p>
+- <a href="https://github.com/soedinglab/MMseqs2">MMseqs2</a>
+- <a href="https://www.ebi.ac.uk/interpro/">InterPro</a>
+- <a href="https://github.com/aziele/pfam_scan">pfam_scan</a></p>
               
             </div>
           </div><footer>
